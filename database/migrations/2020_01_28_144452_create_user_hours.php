@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectsMembersTable extends Migration
+class CreateUserHours extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateProjectsMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_members', function (Blueprint $table) {
+        Schema::create('user_hours', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('project_id')->unsigned()->nullable();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->integer('hours');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateProjectsMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects_members');
+        Schema::dropIfExists('user_hours');
     }
 }

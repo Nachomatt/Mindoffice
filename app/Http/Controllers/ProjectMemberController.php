@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Project;
+use App\User;
+use App\ProjectMember;
 use Illuminate\Http\Request;
 
 class ProjectMemberController extends Controller
@@ -21,9 +23,11 @@ class ProjectMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('projectmembers.create');
+        $projects = Project::all();
+        $users = User::all();
+        return view('projectmembers.create', compact('project','users'));
     }
 
     /**
@@ -32,9 +36,18 @@ class ProjectMemberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Project $project)
     {
-        $projectmember = new ProjectMember();
+        //$request->users heeft alle user IDs die zijn aangevinkt
+        // dd($request->users);
+        foreach($request->users as $u)
+        {
+            $user = new ProjectMember();
+            $user->user_id = $u;
+            $user->project_id = $project->id;
+            $user->save();
+        }
+        return redirect()->route('projects.show',compact('project'))->with('message', 'Project member(s) have been added!');
         
     }
 

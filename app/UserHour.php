@@ -4,10 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class ProjectMember extends Model
+class UserHour extends Model
 {
- 
     public function user(){
         return $this->belongsTo('App\User');
     }

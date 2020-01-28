@@ -39,7 +39,13 @@ class User extends Authenticatable
     ];
 
     public function project(){
-        return $this->belongsTo('App\Project');
+        return $this->belongsToMany('App\Project');
+    }
+    public function projectmember() {
+        return $this->hasOne('App\ProjectMember');
+    }
+     public function userhour() {
+        return $this->hasOne('App\Userhour');
     }
 
 }
