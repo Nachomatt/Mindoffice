@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Project;
+
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class ProjectMemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
-        return view('projects.index', compact('projects'));
+        
     }
 
     /**
@@ -24,7 +23,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        return view('projectmembers.create');
     }
 
     /**
@@ -35,12 +34,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $project = new Project();
-        $project->name = $request->name;
-
-        $project->save();
-
-         return redirect()->route('projects.index')->with('message', 'Project has been created!');
+        $projectmember = new ProjectMember();
+        
     }
 
     /**
@@ -49,9 +44,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($id)
     {
-        return view('projects.show', compact('project'));
+        //
     }
 
     /**

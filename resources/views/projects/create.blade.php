@@ -8,7 +8,6 @@
     <form action="{{route('projects.store')}}" method="post">
         @csrf
         Name: <input type="text" name="name"><br>
-        <input type="checkbox" onclick="myFunction()">Show Password<br>
         <br> <button type="submit">Submit</button>
     </form>
 @stop
