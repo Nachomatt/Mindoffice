@@ -1,7 +1,30 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
 @section('content')
-     <nav class="nav">
+
+
+
+    <h1 class="mt-5 knoptekst2">Users</h1>
+    @if (session('message'))
+
+        <div  class="alert alert-success"  role="alert">
+
+            {{  session('message')  }}
+        </div>
+
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <nav class="nav">
         <ul class="nav nav-tabs">
             <li>
                 <a class="nav-link knopje" href="{{ route('users.create') }}"><h2 class="knoptekst">Create new user</h2></a>
@@ -30,4 +53,5 @@
         @endforeach
         </tbody>
     </table>
+
 @endsection

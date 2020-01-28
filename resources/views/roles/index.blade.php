@@ -32,7 +32,7 @@
             <tr>
                 <td scope="row">{{ $role->id }}</td>
                 <td>{{ $role->name }}</td>
-                <td class="details"><a href="{{ route('roles.show', $role->id) }}"><h2 class="knoptekst">Details</h2>e</a></td>
+                <td class="details"><a href="{{ route('roles.show', $role->id) }}"><h2 class="knoptekst">Details</h2></a></td>
             </tr>
         @endforeach
         </tbody>

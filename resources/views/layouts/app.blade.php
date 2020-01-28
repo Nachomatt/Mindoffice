@@ -56,12 +56,12 @@
                                 </li>
                           <li class="nav-item">
                                     <a class="nav-link" href="{{ route('permissions.index') }}">
-                                        <span class="knoptekst">{{ __('Roles') }}</span>
+                                        <span class="knoptekst">{{ __('Permissions') }}</span>
                                     </a>
                                 </li>
                                   <li class="nav-item">
                                     <a class="nav-link" href="{{ route('roles.index') }}">
-                                        <span class="knoptekst">{{ __('Permissions') }}</span>
+                                        <span class="knoptekst">{{ __('Roles') }}</span>
                                     </a>
                                 </li>        
                             <li class="nav-item dropdown">

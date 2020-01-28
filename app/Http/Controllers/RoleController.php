@@ -14,14 +14,14 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware("permission:see roles")->only("index", "show");
-        $this->middleware("permission:create roles")->only("create", "store");
-        $this->middleware("permission:edit roles")->only("edit", "update");
-        $this->middleware("permission:delete roles")->only("destroy");
+    // public function __construct()
+    // {
+    //     $this->middleware("permission:see roles")->only("index", "show");
+    //     $this->middleware("permission:create roles")->only("create", "store");
+    //     $this->middleware("permission:edit roles")->only("edit", "update");
+    //     $this->middleware("permission:delete roles")->only("destroy");
 
-    }
+    // }
 
     public function index()
     {
