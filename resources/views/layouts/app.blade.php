@@ -64,7 +64,12 @@
                                     <a class="nav-link" href="{{ route('roles.index') }}">
                                         <span class="knoptekst">{{ __('Roles') }}</span>
                                     </a>
-                                </li>   
+                                </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('projects.index') }}">
+                                        <span class="knoptekst">{{ __('Projects') }}</span>
+                                    </a>
+                                </li>      
                            @endcan            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
