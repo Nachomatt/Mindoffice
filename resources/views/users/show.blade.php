@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<!-- @can('Moderate Website') -->
+@can('Moderate Website')
 @section('content')
     <span class="knoptekst">
     <a class="goback"   href="{{route('users.index')}}">Go Back</a>
@@ -28,4 +28,4 @@
     </form>
     </span>
 @endsection
-<!-- @endcan -->
+@endcan

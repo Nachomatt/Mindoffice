@@ -14,14 +14,14 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // {
-    //     $this->middleware("permission:see permissions")->only("index", "show");
-    //     $this->middleware("permission:create permissions")->only("create", "store");
-    //     $this->middleware("permission:edit permissions")->only("edit", "update");
-    //     $this->middleware("permission:delete permissions")->only("destroy");
+    public function __construct()
+    {
+        $this->middleware("permission:see permissions")->only("index", "show");
+        $this->middleware("permission:create permissions")->only("create", "store");
+        $this->middleware("permission:edit permissions")->only("edit", "update");
+        $this->middleware("permission:delete permissions")->only("destroy");
 
-    // }
+    }
 
     public function index()
     {

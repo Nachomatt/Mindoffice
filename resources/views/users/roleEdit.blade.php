@@ -2,7 +2,7 @@
 
 
 
-<!-- @can('Moderate Website') -->
+@can('Moderate Website')
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -24,4 +24,4 @@
         <button type="submit">Submit</button>
     </form>
 @stop
-<!-- @endcan -->
+@endcan

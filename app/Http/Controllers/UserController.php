@@ -16,14 +16,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // {
-    //     $this->middleware("permission:see users")->only("index", "show");
-    //     $this->middleware("permission:create users")->only("create", "store");
-    //     $this->middleware("permission:edit users")->only("edit", "permissionEdit", "update","permissionUpdate");
-    //     $this->middleware("permission:delete users")->only("destroy");
+    public function __construct()
+    {
+        $this->middleware("permission:see users")->only("index", "show");
+        $this->middleware("permission:create users")->only("create", "store");
+        $this->middleware("permission:edit users")->only("edit", "permissionEdit", "update","permissionUpdate");
+        $this->middleware("permission:delete users")->only("destroy");
 
-    // }
+    }
 
     public function index()
     {

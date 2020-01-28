@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<!-- @can('Moderate Website') -->
+@can('Moderate Website')
 
 
 
@@ -23,4 +23,4 @@
         <br> <button type="submit">Submit</button>
     </form>
 @stop
-<!-- @endcan -->
+@endcan
