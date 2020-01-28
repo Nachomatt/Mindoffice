@@ -29,4 +29,4 @@ Route::put('users/{user}/permissionEdit', 'UserController@permissionUpdate')->na
 Route::resource('projects', 'ProjectController');
 Route::resource('projectmembers', 'ProjectMemberController');
 Route::resource('projects.projectmembers', 'ProjectMemberController');
-Route::resource('userhours', 'UserHourController');
+Route::resource('projects.projectmembers.userhours', 'UserHourController');

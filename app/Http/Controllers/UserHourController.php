@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Userhour;
+use App\Project;
+use App\ProjectMember;
+use App\User;
 
 class UserHourController extends Controller
 {
@@ -11,9 +15,11 @@ class UserHourController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProjectMember $projectmember, User $user, Project $project)
     {
-        //
+        $projectmember = ProjectMember::all();
+        $projects = Project::all();
+        return view('userhours.index',compact('project','projectmember'));
     }
 
     /**
@@ -43,9 +49,11 @@ class UserHourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project, Userhour $userhour)
     {
-        //
+        $projects = Project::all();
+        $userhours = Userhour::all();
+        return view('userhours.show',compact('userhours','projects'));
     }
 
     /**

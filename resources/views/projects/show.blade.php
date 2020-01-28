@@ -13,7 +13,7 @@
     </p>
     @foreach($projectmembers as $p)
         @if($p->project_id = $project->id)
-            <a href="{{route('userhours.show',$p->user_id)}}">{{$p->user->name}} </span><br>
+            <a href="{{route('projects.projectmembers.userhours.index',$p->user_id)}}">{{$p->user->name}} </span><br>
         @endif
     @endforeach
     <form action="{{ route('projects.destroy', $project) }}" method="post">
