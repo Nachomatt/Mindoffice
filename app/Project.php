@@ -6,14 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    public function user(){
+    public function members() {
+        return $this->belongsToMany(User::class, 'project_members');
+    }
 
-        return $this->belongsToMany('App\User');
-    }
-   public function projectmember() {
-        return $this->hasOne('App\ProjectMember');
-    }
-     public function userhour() {
+    public function userhour()
+    {
         return $this->hasOne('App\UserHour');
     }
     public $timestamps = false;

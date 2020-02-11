@@ -11,12 +11,11 @@
     <p class="knoptekst">Name:
         {{$project->name}}
     </p>
+    <a href="{{route('projects.projectmembers.index',$project->id)}}">See all project members</a>
     @foreach($projectmembers as $p)
-        @if($p->project_id = $project->id)
-            <a href="{{route('projects.projectmembers.userhours.index',$p->user_id)}}">{{$p->user->name}} </span><br>
-        @endif
+        <h5>{{$p->name}}</h5><br>
     @endforeach
-    <form action="{{ route('projects.destroy', $project) }}" method="post">
+    <form action="{{ route('projects.destroy', $project->id) }}" method="post">
         @csrf @method('delete')
         <button type="submit" class="verwijderen2" onclick="confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete Project</button>
     </form>

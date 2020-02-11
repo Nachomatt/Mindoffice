@@ -15,11 +15,11 @@ class UserHourController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ProjectMember $projectmember, User $user, Project $project)
+    public function index()
     {
         $projectmember = ProjectMember::all();
         $projects = Project::all();
-        return view('userhours.index',compact('project','projectmember'));
+        return view('userhours.index',compact('projects','projectmember'));
     }
 
     /**

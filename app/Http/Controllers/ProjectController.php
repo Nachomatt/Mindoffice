@@ -14,7 +14,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project)
     {
         $projects = Project::all();
         return view('projects.index', compact('projects'));
@@ -25,7 +25,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('projects.create');
     }
@@ -52,10 +52,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, ProjectMember $projectmember, User $user)
+    public function show(Project $project)
     {
-        $users = User::all();
-        $projectmembers = ProjectMember::all();
+        $projectmembers = $project->members;
+        $users= User::all();
         return view('projects.show', compact('project','projectmembers', 'users'));
     }
 
@@ -88,8 +88,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('projects.index');
     }
 }

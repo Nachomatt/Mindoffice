@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreProjectMembers;
 use App\Project;
 use App\User;
 use App\ProjectMember;
@@ -13,9 +14,11 @@ class ProjectMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project)
     {
-        
+        $projects = Project::all();
+        $projectmembers = $project->members;
+        return view('projectmembers.index', compact('projectmembers','projects'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ProjectMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Project $project)
+    public function create(Project $project, Store $request)
     {
         $projects = Project::all();
         $users = User::all();
@@ -36,10 +39,9 @@ class ProjectMemberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Project $project)
+    public function store(StoreProjectMembers $request, Project $project)
     {
         //$request->users heeft alle user IDs die zijn aangevinkt
-        // dd($request->users);
         foreach($request->users as $u)
         {
             $user = new ProjectMember();
@@ -48,7 +50,7 @@ class ProjectMemberController extends Controller
             $user->save();
         }
         return redirect()->route('projects.show',compact('project'))->with('message', 'Project member(s) have been added!');
-        
+
     }
 
     /**
