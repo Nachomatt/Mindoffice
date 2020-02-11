@@ -11,9 +11,9 @@
     <p class="knoptekst">Name:
         {{$project->name}}
     </p>
-    <a href="{{route('projects.projectmembers.index',$project->id)}}">See all project members</a>
     @foreach($projectmembers as $p)
-        <h5>{{$p->name}}</h5><br>
+       {{$p->id}}
+            <a href="{{route('projects.projectmembers.show',[$project->id, $p->id])}}">{{$p->name}}</a><br>
     @endforeach
     <form action="{{ route('projects.destroy', $project->id) }}" method="post">
         @csrf @method('delete')

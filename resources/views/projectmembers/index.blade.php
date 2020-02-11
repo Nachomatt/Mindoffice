@@ -23,15 +23,6 @@
             </ul>
         </div>
     @endif
-
-    <nav class="nav">
-        <ul class="nav nav-tabs">
-            <li>
-                <a class="nav-link knopje" href="{{ route('projectmembers.create') }}"><h2 class="knoptekst">Add Project Member</h2></a>
-            </li>
-        </ul>
-    </nav>
-
     <table class="table table-striped infotabel">
         <thead>
         <tr>
@@ -40,11 +31,10 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($projectmembers as $projectmember)
+        @foreach($projectmembers as $p)
             <tr>
-                <td scope="row">{{ $projectmember->id }}</td>
-                <td>{{ $projectmember->name }}</td>
-                <td class="details"><a href="{{ route('projectmembers.show',$projectmember->id) }}"><h2 class="knoptekst">Details</h2></a></td>
+                <td scope="row">{{ $p->id }}</td>
+                <td>{{ $p->name }}</td>
                 <td></td>
             </tr>
         @endforeach

@@ -18,7 +18,7 @@ class ProjectMemberController extends Controller
     {
         $projects = Project::all();
         $projectmembers = $project->members;
-        return view('projectmembers.index', compact('projectmembers','projects'));
+        return view('projectmembers.index', compact('projects','projectmembers'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ProjectMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Project $project, Store $request)
+    public function create(Project $project)
     {
         $projects = Project::all();
         $users = User::all();
@@ -36,8 +36,8 @@ class ProjectMemberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  '\Illuminate\Http\Request  $request'
+     * @return '\Illuminate\Http\Response'
      */
     public function store(StoreProjectMembers $request, Project $project)
     {
@@ -56,12 +56,12 @@ class ProjectMemberController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  'int  $id'
+     * @return '\Illuminate\Http\Response'
      */
-    public function show($id)
+    public function show(Project $project, User $projectmember)
     {
-        //
+        return view('projectmembers.show', compact('project','projectmember'));
     }
 
     /**
@@ -70,7 +70,7 @@ class ProjectMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
         //
     }

@@ -52,11 +52,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Project $project, User $user)
     {
         $projectmembers = $project->members;
-        $users= User::all();
-        return view('projects.show', compact('project','projectmembers', 'users'));
+        return view('projects.show', compact('project','projectmembers', 'user'));
     }
 
     /**
