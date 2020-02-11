@@ -12,7 +12,6 @@
         {{$project->name}}
     </p>
     @foreach($projectmembers as $p)
-       {{$p->id}}
             <a href="{{route('projects.projectmembers.show',[$project->id, $p->id])}}">{{$p->name}}</a><br>
     @endforeach
     <form action="{{ route('projects.destroy', $project->id) }}" method="post">

@@ -70,21 +70,25 @@ class ProjectMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Project $project, User $projectmember)
     {
-        //
+        return view('projectmembers.edit', compact('project','projectmember'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request '$'request'
+     * @param  int  '$id'
+     * @return '\Illuminate\Http\Response'
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ProjectMember $user, Project $project)
     {
-        //
+        $projectmembers = $project->members;
+        $user->user_id = $request->user_id;
+        $user->project_id = $request->project_id;
+        $user->save();
+        return view('projects.show', compact('project','projectmembers'));
     }
 
     /**

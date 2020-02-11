@@ -11,13 +11,11 @@
         </div>
     @endif
     <a class="goback"   href="{{route('projects.show',$project->id)}}">Go Back</a>
-    <form action="{{route('projects.projectmembers.update', $projectmember)}}" method="post">
+    <form action="{{route('projects.projectmembers.update', [$project,$projectmember])}}" method="post">
         @method('PUT')
         @csrf
-        Name: <input type="text" name="name" value="{{$projectmember->name}}"><br>
-        Email: <input type="email" name="email" value="{{$projectmember->email}}"><br>
-        Password: <input type="password" name="password" value="{{$user->password}}" id="myInput"><br>
-        <input class="rollen" type="checkbox" onclick="myFunction()">Show Password<br>
+        Project: <input type="text" name="project_id" value="{{$project->id}}"><br>
+        User: <input type="text" name="user_id" value="{{$projectmember->id}}"><br>
         <br>
         <button type="submit">Submit</button>
     </form>
