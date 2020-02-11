@@ -14,13 +14,12 @@
         </div>
     @endif
     <a class="goback" href="{{route('users.show', $user)}}">Go Back</a>
-    <form action="{{route('users.update', $user)}}" method="post">
+    <form action="{{route('users.permissionUpdate', $user)}}" method="post">
         @method('PUT')
         @csrf
-        Name: <input type="text" name="name" value="{{$user->name}}"><br>
-        Email: <input type="email" name="email" value="{{$user->email}}"><br>
-        Password: <input type="password" name="password" value="{{$user->password}}" id="myInput"><br>
-        <input class="rollen" type="checkbox" onclick="myFunction()">Show Password<br>
+        @foreach($permissions as $permission)
+            {{$permission->name}} <input @if($user->hasPermissionTo($permission)) checked @endif type="checkbox" name="permissions[]" value="{{$permission->name}}"><br>
+        @endforeach
         <br>
         <button type="submit">Submit</button>
     </form>

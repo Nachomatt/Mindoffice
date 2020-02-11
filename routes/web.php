@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('users', 'UserController');
+Route::resource('roles', 'RoleController');
+Route::resource('permissions', 'PermissionController');
+Route::resource('roles', 'RoleController');
+Route::get('users/{user}/roleEdit', 'UserController@roleEdit')->name('users.roleEdit');
+Route::put('users/{user}/roleEdit', 'UserController@roleUpdate')->name('users.roleUpdate');
+Route::get('users/{user}/permissionEdit', 'UserController@permissionEdit')->name('users.permissionEdit');
+Route::put('users/{user}/permissionEdit', 'UserController@permissionUpdate')->name('users.permissionUpdate');
+Route::resource('projects', 'ProjectController');
+Route::resource('projectmembers', 'ProjectMemberController');
+Route::resource('projects.projectmembers', 'ProjectMemberController');
+Route::resource('projects.projectmembers.userhours', 'UserHourController');

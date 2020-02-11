@@ -4,7 +4,7 @@
 
 
 
-    <h1 class="mt-5 knoptekst2">Users</h1>
+    <h1 class="mt-5 knoptekst2" >Permissions</h1>
     @if (session('message'))
 
         <div  class="alert alert-success"  role="alert">
@@ -27,7 +27,7 @@
     <nav class="nav">
         <ul class="nav nav-tabs">
             <li>
-                <a class="nav-link knopje" href="{{ route('users.create') }}"><h2 class="knoptekst">Create new user</h2></a>
+                <a class="nav-link knopje" href="{{ route('permissions.create') }}"><h2 class="knoptekst">Create new permission</h2></a>
             </li>
         </ul>
     </nav>
@@ -37,18 +37,15 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scope="col">E-Mail</th>
             <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $user)
+        @foreach($permissions as $permission)
             <tr>
-                <td scope="row">{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td class="details"><a href="{{ route('users.show',$user->id) }}"><h2 class="knoptekst">Details</h2></a></td>
-                <td></td>
+                <td scope="row">{{ $permission->id }}</td>
+                <td>{{ $permission->name }}</td>
+                <td class="details"><a  href="{{ route('permissions.show',$permission->id) }}"><h2 class="knoptekst">Details</h2></a></td>
             </tr>
         @endforeach
         </tbody>
