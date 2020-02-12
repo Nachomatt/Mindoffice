@@ -20,6 +20,7 @@ class CreateUserHours extends Migration
             $table->bigInteger('project_id')->unsigned()->nullable();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->integer('hours');
+            $table->timestamps();
         });
     }
 

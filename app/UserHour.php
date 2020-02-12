@@ -12,5 +12,5 @@ class UserHour extends Model
     public function project(){
         return $this->belongsTo('App\Project');
     }
-        public $timestamps = false;
+        public $timestamps = true;
 }

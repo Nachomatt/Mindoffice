@@ -41,8 +41,8 @@ class User extends Authenticatable
     public function project(){
         return $this->belongsToMany('App\Project');
     }
-    public function projectmember() {
-        return $this->hasOne('App\ProjectMember');
+    public function userProjects() {
+        return $this->belongsToMany(Project::class, 'project_members');
     }
      public function userhour() {
         return $this->hasOne('App\Userhour');

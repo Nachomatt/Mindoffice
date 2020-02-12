@@ -15,11 +15,11 @@ class UserHourController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project, User $projectmember)
     {
-        $projectmember = ProjectMember::all();
         $projects = Project::all();
-        return view('userhours.index',compact('projects','projectmember'));
+        $userhours = Userhour::where('user_id',$projectmember->id);
+        return view('userhours.index',compact('projects','project','projectmember','userhours'));
     }
 
     /**
@@ -27,9 +27,9 @@ class UserHourController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project, User $projectmember)
     {
-        //
+        return view('userhours.create',compact('project','projectmember'));
     }
 
     /**
@@ -38,9 +38,14 @@ class UserHourController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Userhour $userhour,Project $project ,  User $projectmember)
     {
-        //
+        $userhour = new Userhour();
+        $userhour->hours = $request->hours;
+        $userhour->user_id = $projectmember->id;
+        $userhour->project_id = $project->id;
+        $userhour->save();
+        return view('projectmembers.show',compact('project','projectmember','userhour'));
     }
 
     /**
@@ -49,11 +54,11 @@ class UserHourController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, Userhour $userhour)
+    public function show(Project $project, User $projectmember, Userhour $userhour )
     {
         $projects = Project::all();
         $userhours = Userhour::all();
-        return view('userhours.show',compact('userhours','projects'));
+        return view('userhours.show',compact('userhours','projects','projectmember','project'));
     }
 
     /**

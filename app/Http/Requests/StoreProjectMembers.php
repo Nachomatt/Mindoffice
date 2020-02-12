@@ -13,7 +13,7 @@ class StoreProjectMembers extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,5 +23,15 @@ class StoreProjectMembers extends FormRequest
      */
     public function rules()
     {
+        return [
+            'user_id' => 'required|unique',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'user_id.unique' => 'This user has already been assigned to this project.',
+
+        ];
     }
 }

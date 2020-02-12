@@ -14,8 +14,8 @@
     <form action="{{route('projects.projectmembers.update', [$project,$projectmember])}}" method="post">
         @method('PUT')
         @csrf
-        Project: <input type="text" name="project_id" value="{{$project->id}}"><br>
-        User: <input type="text" name="user_id" value="{{$projectmember->id}}"><br>
+        User: <input type="text" name="user_id" value="{{$projectmember->id}}">{{$projectmember->name}}<br>
+        User: <input type="text" name="project_id" value="{{$project->id}}">{{$project->name}}<br>
         <br>
         <button type="submit">Submit</button>
     </form>

@@ -1,26 +1,24 @@
 @extends('layouts.app')
 @can('Moderate Website')
 @section('content')
-    <a class="goback" href="{{route('projects.show',$project->id)}}">Go Back</a>
+    <a class="goback"   href="{{route('projectmembers.show',[$project->id,$projectmember->id])}}">Go Back</a>
+    @foreach($userhours as $u)
+        <span class="knoptekst">
+
     <br>
-    <a class="goback" href="{{route('userhours.create',$user->id)}}">Log new Hours</a>
-    <br>
-    
-    <br>
-    <br>
-    <p class="knoptekst">Name:
-        {{$user->name}}
+    <p>Hours:
+        {{$u->hours}}
     </p>
-    @foreach($projectmembers as $p)
-        @if($p->project_id = $project->id)
-            <a href="{{route('userhours.show',$p->user_id)}}">{{$p->user->name}} </span><br>
-            <a class="aanpassen"  href="{{route('userhours.edit',$userhour->id)}}">Edit Hour</a>
-        @endif
-   
-    <form action="{{ route('projects.destroy', $project) }}" method="post">
-        @csrf @method('delete')
-        <button type="submit" class="verwijderen2" onclick="confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete Project</button>
-         @endforeach
-    </form>
+    <p>Project:
+        {{$project->name}}
+    </p>
+{{--        <a class="aanpassen"  href="{{route('projects.projectmembers.edit',[$project->id,$projectmember->id])}}">Edit project</a><br><br>--}}
+    <br>
+{{--    <form action="{{ route('projects.destroy', $project) }}" method="post">--}}
+            {{--        @csrf @method('delete')--}}
+            {{--        <button type="submit" class="btn btn-danger" onclick="confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete project</button>--}}
+            {{--    </form>--}}
+    </span>
+    @endforeach
 @endsection
 @endcan
