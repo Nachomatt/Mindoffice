@@ -6,6 +6,7 @@ use App\ProjectMember;
 use App\User;
 use App\UserHour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -14,9 +15,14 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project)
+    public function index(User $user)
     {
-        $projects = Project::all();
+        if(Auth::user()->hasRole('admin')){
+            $projects = Project::all();
+        } else{
+            $projects = Auth::user()->userProjects;
+        }
+
         return view('projects.index', compact('projects'));
     }
 
@@ -54,7 +60,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project, User $user)
     {
-        $projectmembers = $project->members;
         return view('projects.show', compact('project','projectmembers', 'user'));
     }
 
@@ -64,9 +69,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('projects.edit',  compact('project'));
     }
 
     /**
@@ -76,9 +81,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $project->name = $request->name;
+        $projects = Project::all();
+        $project->save();
+        return redirect()->route('projects.index',compact('projects'));
     }
 
     /**

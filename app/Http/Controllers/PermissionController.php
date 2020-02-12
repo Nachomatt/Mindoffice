@@ -45,7 +45,7 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePermission $request)
+    public function store(Request $request)
     {
         $permission = Permission::create(['name' => $request->name]);
         $permission->save();
@@ -81,7 +81,7 @@ class PermissionController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StorePermission $request, Permission $permission)
+    public function update(Request $request, Permission $permission)
     {
         $permission->name = $request->name;
         $permission->save();

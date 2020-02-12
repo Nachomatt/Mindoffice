@@ -19,8 +19,7 @@ class ProjectMemberController extends Controller
     public function index(Project $project)
     {
         $projects = Project::all();
-        $projectmembers = $project->members;
-        return view('projectmembers.index', compact('projects', 'projectmembers'));
+        return view('projectmembers.index', compact('projects','project'));
     }
 
     /**
@@ -59,7 +58,7 @@ class ProjectMemberController extends Controller
      * @param  'int  $id'
      * @return '\Illuminate\Http\Response'
      */
-    public function show(User $projectmember, UserHour $userhour, Project $project)
+    public function show(UserHour $userhour, Project $project,User $projectmember)
     {
         return view('projectmembers.show', compact('project', 'projectmember', 'userhour'));
     }
@@ -83,23 +82,25 @@ class ProjectMemberController extends Controller
      * @param int  '$id'
      * @return '\Illuminate\Http\Response'
      */
-    public function update(Request $request, Project $project, ProjectMember $user)
+    public function update(Request $request, Project $project, User $projectmember)
     {
-        $user->user_id = $request->user_id;
-        $user->project_id = $request->project_id;
-        $projectmembers = $project->members;
-        $user->save();
-        return view('projects.show', compact('project', 'projectmembers'));
+        $projectmember->user_id = $project->members()->attach(User::find($projectmember->id));
+        $projectmember->userProjects()->detach(Project::find($project->id));
+        $projectmember->userProjects()->attach(Project::find($request->project_id));
+
+        return view('projects.show', compact('project'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return '\Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project, User $projectmember)
     {
-        //
+        $project->members()->detach(Project::find($project->id));
+        $project->members()->detach(User::find($projectmember->id));
+        return view('projects.show', compact('project'));
     }
 }

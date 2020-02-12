@@ -31,7 +31,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($projectmembers as $p)
+        @foreach($project->members as $p)
             <tr>
                 <td scope="row">{{ $p->id }}</td>
                 <td>{{ $p->name }}</td>

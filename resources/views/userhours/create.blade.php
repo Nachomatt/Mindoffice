@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@can('Moderate Website')
+@can('see projects')
 
 
 
 @section('content')
-    <a class="goback" href="{{route('projects.show',$project->id)}}">Go Back</a>
+    <a class="goback" href="{{route('projects.projectmembers.show',[$project,$projectmember])}}">Go Back</a>
     <form action="{{route('projects.projectmembers.userhours.store',[$project,$projectmember])}}" method="post">
         @csrf
         <input type="number" name="hours"><br>

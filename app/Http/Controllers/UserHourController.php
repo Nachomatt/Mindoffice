@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Userhour;
+use App\UserHour;
 use App\Project;
 use App\ProjectMember;
 use App\User;
@@ -13,85 +13,90 @@ class UserHourController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return '\Illuminate\Http\Response
      */
-    public function index(Project $project, User $projectmember)
+    public function index(Project $project, User $projectmember,UserHour $userhour)
     {
-        $projects = Project::all();
-        $userhours = Userhour::where('user_id',$projectmember->id);
-        return view('userhours.index',compact('projects','project','projectmember','userhours'));
+        $projects = Project::where('project_id', $project->id);
+        $userhours = UserHour::where('user_id',$projectmember->id)->get();
+        return view('userhours.index', compact('projects', 'project', 'projectmember', 'userhours','userhour'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return '\Illuminate\Http\Response
      */
     public function create(Project $project, User $projectmember)
     {
-        return view('userhours.create',compact('project','projectmember'));
+        return view('userhours.create', compact('project', 'projectmember'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return '\Illuminate\Http\Response
      */
-    public function store(Request $request, Userhour $userhour,Project $project ,  User $projectmember)
+    public function store(Request $request, UserHour $userhour, Project $project, User $projectmember)
     {
         $userhour = new Userhour();
         $userhour->hours = $request->hours;
         $userhour->user_id = $projectmember->id;
         $userhour->project_id = $project->id;
         $userhour->save();
-        return view('projectmembers.show',compact('project','projectmember','userhour'));
+        return view('projectmembers.show', compact('project', 'projectmember', 'userhour'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return '\Illuminate\Http\Response
      */
-    public function show(Project $project, User $projectmember, Userhour $userhour )
+    public function show(Project $project, User $projectmember, UserHour $userhour)
     {
         $projects = Project::all();
-        $userhours = Userhour::all();
-        return view('userhours.show',compact('userhours','projects','projectmember','project'));
+        return view('userhours.show', compact('userhour', 'projects', 'projectmember', 'project', 'userhour'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return '\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project, User $projectmember, UserHour $userhour)
     {
-        //
+        return view('userhours.edit', compact('project', 'projectmember', 'userhour'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return '\Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project, User $projectmember, UserHour $userhour)
     {
-        //
+        $userhour->hours = $request->hours;
+        $userhour->save();
+        $userhours = Userhour::all();
+        return view('userhours.index', compact('userhours', 'projects', 'projectmember', 'project', 'userhour','userhours'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+/**
+ * Remove the specified resource from storage.
+ *
+ * @param int $id
+ * @return '\Illuminate\Http\Response
+ */
+public
+function destroy(Project $project, User $projectmember, UserHour $userhour)
+{
+    $userhour->delete();
+    $userhours = Userhour::all();
+    return view('userhours.index', compact('project', 'projectmember', 'userhours'));
+}
 }
