@@ -8,13 +8,15 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/wow.css') }}">
+        <script src="{{ asset('js/script.js') }}" defer></script>
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background: linear-gradient(90deg, rgba(85,91,87,1) 0%, rgba(0,0,0,1) 50%, rgba(85,91,87,1) 100%);
                 font-family: 'Nunito', sans-serif;
+                color:white;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -48,53 +50,54 @@
                 font-size: 84px;
             }
 
-            .links > a {
-                color: #636b6f;
+            a {
+                color:white;
                 padding: 0 25px;
-                font-size: 13px;
+                font-size: 26px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
-                text-transform: uppercase;
             }
 
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .text-white{
+                color:white;
+            }
+            .item{
+                display:inline-block;
+                margin-bottom:0;
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
             <div class="content">
-                <div class="title m-b-md">
-                   MindOffice
+                <div class=" wow fadeInUp title m-b-md" data-wow-delay="0,1s">
+                    <h2 class="text-white">HourLogger</h2>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                @if (Route::has('login'))
+                    <div class="title links text-white">
+                        @auth
+                            <div class=" wow fadeInLeft" data-wow-delay="0.5s">
+                            <a href="{{ url('/home') }}">Home</a>
+                            </div>
+                        @else
+                            <div class="wow fadeInLeft item" data-wow-delay="0.5s">
+                            <a href="{{ route('login') }}">Login</a>
+                            </div>
+                            <div class="wow fadeInRight item" data-wow-delay="0.5s">
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                            </div>
+                        @endauth
+                    </div>
+                @endif
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+        <script src="{{asset('js/script.js')}}"></script>
     </body>
 </html>
