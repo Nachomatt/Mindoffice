@@ -87,7 +87,7 @@
 
                             <div class="dropdown-menu bg-dark dropdown-menu-right text-white text-decoration-none"
                                  aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-white text-decoration-none" href="{{ route('logout') }}"
+                                <a class="dropdown-item text-white text-decoration-none bg-dark" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                                     <span class="text-white">{{ __('Logout') }}</span>
@@ -110,4 +110,9 @@
     </main>
 </div>
 </body>
+<footer class="footer bg-dark">
+    <div class="container">
+        <h5 class="text-center mt-3 text-white"> <?php echo date('Y'); ?> Deze site is gemaakt door Matthijs Vos.</h5>
+    </div>
+</footer>
 </html>
