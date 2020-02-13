@@ -39,7 +39,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
-            <th scopte="col">Details</th>
+            <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
