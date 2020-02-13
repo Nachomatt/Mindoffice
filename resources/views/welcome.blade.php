@@ -90,8 +90,9 @@
                             <div class="wow fadeInRight item" data-wow-delay="0.5s">
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}">Register</a>
-                            @endif
                             </div>
+                            @endif
+
                         @endauth
                     </div>
                 @endif

@@ -4,7 +4,7 @@
 
 
 
-    <h1 class="mt-5 knoptekst2">Projects</h1>
+    <h1 class="text-center text-white">Projects</h1>
     @if (session('message'))
 
         <div class="alert alert-success" role="alert">
@@ -24,33 +24,33 @@
         </div>
     @endif
     @can('Moderate Website')
-        <nav class="nav">
-            <ul class="nav nav-tabs">
+        <nav class="nav d-flex justify-content-center">
+            <ul class="nav">
                 <li>
-                    <a class="nav-link knopje" href="{{ route('projects.create') }}"><h2 class="knoptekst">Create new
+                    <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('projects.create') }}"><h2 class="text-center">Create new
                             project</h2></a>
                 </li>
             </ul>
         </nav>
     @endcan
-    <table class="table table-striped infotabel">
+    <div class="d-flex justify-content-center">
+    <table class="table table-striped table-dark table-bordered w-75 align-self-center">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scopte="col">Details</th>
         </tr>
         </thead>
         <tbody>
         @foreach($projects as $project)
             <tr>
-                <td scope="row">{{ $project->id }}</td>
+                <td>{{ $project->id }}</td>
                 <td>{{ $project->name }}</td>
-                <td class="details"><a href="{{ route('projects.show',$project->id) }}"><h2 class="knoptekst">
-                            Details</h2></a></td>
-                <td></td>
+                <td class="details"><a href="{{ route('projects.show',$project->id) }}"><h2 class="btn btn-dark btn-outline-light">Details</h2></a></td>
             </tr>
         @endforeach
         </tbody>
     </table>
-
+    </div>
 @endsection

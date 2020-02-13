@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Test Test 1 2 3</div>
+            <div class="wow fadeInDown card bg-secondary text-white mt-5">
+                <div class="card-header bg-dark text-white">Test Test 1 2 3</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                       <div class="text-dark">Welcome, {{ Auth::user()->name }}. You are now logged in.</div>
+                       <div>Welcome, {{ Auth::user()->name }}. You are now logged in.</div>
                 </div>
             </div>
         </div>
