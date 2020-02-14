@@ -22,7 +22,7 @@
 
             <br>
             <div class="d-flex justify-content-center">
-                <a class="btn btn-primary goback mr-2" href="{{route('projects.show',$project->id)}}">Go Back</a>
+                <a class="btn btn-primary mr-2" href="{{route('projects.show',$project->id)}}">Go Back</a>
                 <button class="btn btn-success" type="submit">Submit</button>
             </div>
         </form>

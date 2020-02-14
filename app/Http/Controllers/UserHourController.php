@@ -57,7 +57,8 @@ class UserHourController extends Controller
     public function show(Project $project, User $projectmember, UserHour $userhour)
     {
         $projects = Project::all();
-        return view('userhours.show', compact('userhour', 'projects', 'projectmember', 'project', 'userhour'));
+        $userhours = UserHour::where('user_id',$projectmember->id)->get();
+        return view('userhours.show', compact('userhour', 'projects', 'projectmember', 'project', 'userhour','userhours'));
     }
 
     /**
@@ -68,7 +69,8 @@ class UserHourController extends Controller
      */
     public function edit(Project $project, User $projectmember, UserHour $userhour)
     {
-        return view('userhours.edit', compact('project', 'projectmember', 'userhour'));
+        $userhours = UserHour::where('user_id',$projectmember->id)->get();
+        return view('userhours.edit', compact('project', 'projectmember', 'userhour','userhours'));
     }
 
     /**

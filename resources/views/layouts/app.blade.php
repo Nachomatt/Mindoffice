@@ -110,9 +110,9 @@
     </main>
 </div>
 </body>
-<footer class="footer bg-dark">
+<footer class="page-footer fixed-bottom bg-dark">
     <div class="container">
-        <h5 class="text-center mt-3 text-white"> <?php echo date('Y'); ?> Deze site is gemaakt door Matthijs Vos.</h5>
+        <h5 class="text-center mt-3 text-white"> <?php echo date('Y'); ?> Deze site is gemaakt door: Matthijs Vos.</h5>
     </div>
 </footer>
 </html>

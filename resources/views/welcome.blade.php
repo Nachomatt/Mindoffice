@@ -4,11 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>HourLogger</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/wow.css') }}">
+        <link rel="icon" href="{{ asset('storage/logo.png') }}">
         <script src="{{ asset('js/script.js') }}" defer></script>
 
         <!-- Styles -->

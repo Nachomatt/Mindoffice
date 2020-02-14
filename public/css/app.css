@@ -10895,3 +10895,7 @@ a.text-dark:focus {
     line-height: 60px;
     background-color: #1A1A1B;
 }
+/*Speciaal voor jou Martijn c:*/
+.text-smol{
+    font-size:14px;
+}
