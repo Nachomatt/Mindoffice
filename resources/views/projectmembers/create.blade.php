@@ -10,8 +10,8 @@
             <h2 class=" text-white text-center">All Users</h2>
             <div class="card bg-dark border-top border-left border-bottom">
                 <div class="row mr-0">
-                    @foreach($users as $user)
-                        <div class="col-3 border-right wow fadeInLeft" data-wow-delay="0.{{$user->id}}s">
+                    @foreach($users as $key => $user)
+                        <div class="col-3 border-right wow fadeInLeft" data-wow-delay="{{ $key * 0.015 }}s">
                             <span>{{$user->name}}: <input type="checkbox" name="users[]"
                                                           value="{{$user->id}}"></span><br>
                         </div>

@@ -15,6 +15,7 @@
     <script src="{{ asset('js/script.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="icon" href="{{ asset('storage/logo.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
 
