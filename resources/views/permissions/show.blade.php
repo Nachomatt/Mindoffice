@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @can('Moderate Website')
+
 @section('content')
     <h1 class="text-white text-center">Permission: {{$permission->name}}</h1>
     <div class="container d-flex justify-content-center">
@@ -7,8 +8,8 @@
             <p class="knoptekst permissionlijst">Name:
                 {{$permission->name}}
             </p>
-            <p class="knoptekst permissionlijst">Type:
-                {{$permission->permissionType->name}}
+            <p>Type:
+                {{$permission->type->name ?? ''}}
             </p>
             <ul class="nav flex-row">
                 <li class="nav-item ml-1">
@@ -29,7 +30,7 @@
                 </li>
             </ul>
         </div>
-    </div>>
+    </div>
     </div>
 
 @endsection

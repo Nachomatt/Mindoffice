@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePermission;
+use App\Permission;
 use App\PermissionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -17,7 +17,7 @@ class PermissionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware("permission:see permissions")->only("index", "show");
+        $this->middleware("permission:see permissssssssions")->only("index", "show");
         $this->middleware("permission:create permissions")->only("create", "store");
         $this->middleware("permission:edit permissions")->only("edit", "update");
         $this->middleware("permission:delete permissions")->only("destroy");
@@ -38,7 +38,7 @@ class PermissionController extends Controller
     public function create()
     {
         $permissionTypes = PermissionType::all();
-        return view('permissions.create', compact('permissions','permissiontypes'));
+        return view('permissions.create', compact('permissions','permissionTypes'));
     }
 
     /**
@@ -63,7 +63,6 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        dd($permission->permissiontype);
         return view('permissions.show', compact('permission'));
     }
 
@@ -76,7 +75,7 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         $permissionTypes = PermissionType::all();
-        return view('permissions.edit', compact('permission','permissiontypes'));
+        return view('permissions.edit', compact('permission','permissionTypes'));
     }
 
     /**

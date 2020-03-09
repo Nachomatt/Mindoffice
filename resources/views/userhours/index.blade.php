@@ -4,7 +4,8 @@
 
     <h5 class="text-white text-center"><a class="btn btn-primary mx-1"
                                           href="{{route('projects.projectmembers.show',[$project->id,$projectmember->id])}}">Go
-            Back</a>Hours logged by: {{Auth::user()->name}}</h5>
+            Back</a>
+        Hours logged by: {{Auth::user()->name}}</h5>
     <div class="container">
         <div class="row">
             @foreach($userhours as $u)

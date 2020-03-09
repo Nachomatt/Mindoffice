@@ -3,7 +3,6 @@
 @section('content')
 
 
-
     <h1 class="text-white text-center">Users</h1>
     @if (session('message'))
 
