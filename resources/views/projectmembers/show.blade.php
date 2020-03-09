@@ -36,7 +36,7 @@
                               method="post">
                             @csrf @method('delete')
                             <button type="submit" class="btn btn-danger mb-2 my-2"
-                                    onclick="confirm('Are you sure, you want to delete projectmember: {{ $projectmember->name }}?');">
+                                    onclick="return confirm('Are you sure, you want to delete projectmember: {{ $projectmember->name }}?');">
                                 Delete project member
                             </button>
                             @endcan

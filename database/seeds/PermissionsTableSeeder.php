@@ -32,5 +32,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'edit users']);
         Permission::create(['name' => 'delete users']);
 
+        Permission::create(['name' => 'see projects']);
+
     }
 }

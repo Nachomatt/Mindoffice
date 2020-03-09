@@ -19,7 +19,7 @@
           method="post">
         @csrf @method('delete')
         <button type="submit" class="btn btn-danger"
-                onclick="confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete logged hours</button>
+                onclick="return confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete logged hours</button>
     </form>
     </span>
     @endforeach

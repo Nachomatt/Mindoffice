@@ -30,3 +30,4 @@ Route::resource('projects', 'ProjectController');
 Route::resource('projectmembers', 'ProjectMemberController');
 Route::resource('projects.projectmembers', 'ProjectMemberController');
 Route::resource('projects.projectmembers.userhours', 'UserHourController');
+Route::resource('permissionTypes', 'PermissionTypeController');

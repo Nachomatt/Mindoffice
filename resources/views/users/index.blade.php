@@ -4,10 +4,10 @@
 
 
 
-    <h1 class="mt-5 knoptekst2">Users</h1>
+    <h1 class="text-white text-center">Users</h1>
     @if (session('message'))
 
-        <div  class="alert alert-success"  role="alert">
+        <div class="alert alert-success" role="alert">
 
             {{  session('message')  }}
         </div>
@@ -24,34 +24,38 @@
         </div>
     @endif
 
-    <nav class="nav">
-        <ul class="nav nav-tabs">
+    <nav class="nav d-flex justify-content-center">
+        <ul class="nav">
             <li>
-                <a class="nav-link knopje" href="{{ route('users.create') }}"><h2 class="knoptekst">Create new user</h2></a>
+                <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('users.create') }}"><h2 class="knoptekst">Create new user</h2>
+                </a>
             </li>
         </ul>
     </nav>
 
-    <table class="table table-striped infotabel">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">E-Mail</th>
-            <th scope="col">Details</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($users as $user)
+    <div class="d-flex justify-content-center pb-5">
+        <table class="table table-striped table-dark table-bordered w-75 align-self-center">
+            <thead>
             <tr>
-                <td scope="row">{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td class="details"><a href="{{ route('users.show',$user->id) }}"><h2 class="knoptekst">Details</h2></a></td>
-                <td></td>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">E-Mail</th>
+                <th scope="col">Details</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($users as $user)
+                <tr>
+                    <td scope="row">{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td class="details"><a href="{{ route('users.show',$user->id) }}"><h2 class="btn btn-dark btn-outline-light">Details</h2>
+                        </a></td>
+                    <td></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 
 @endsection

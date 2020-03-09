@@ -16,15 +16,13 @@
     <div class="container">
 
         <div class="card card-body w-25 bg-dark text-white">
-            <a class="btn btn-primary w-50 mb-1" href="{{route('permissions.show', $permission)}}">Go Back</a>
-            <form action="{{route('permissions.update', $permission)}}" method="post">
+            <a class="btn btn-primary w-50 mb-1" href="{{route('permissionTypes.show', $permissionType)}}">Go Back</a>
+            <form action="{{route('permissionTypes.update', $permissionType)}}" method="post">
                 @method('PUT')
                 @csrf
-                Name: <input type="text" name="name" value="{{$permission->name}}"><br>
+                Name: <input type="text" name="name" value="{{$permissionType->name}}"><br>
                 <br>
-                @foreach($permissionTypes as $permissionType)
-                    {{$permissionType->name}}: <input type="radio" name="permission_type_id" value="{{$permissionType->id}}"><br>
-                @endforeach
+
                 <button class="btn btn-success" type="submit">Submit</button>
             </form>
         </div>

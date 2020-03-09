@@ -29,22 +29,31 @@
                 @endforeach
             </div>
             <div class="bg-dark">
-                <a class="btn btn-primary w-25 mb-1" href="{{route('projects.index')}}">Go Back</a>
-                @can('Moderate Website')
-                    <span><a class="btn btn-success mb-1"
-                             href="{{route('projects.projectmembers.create',$project->id)}}">Add Project Members</a>
-                <a class="btn btn-primary mb-1" href="{{route('projects.edit',$project->id)}}">Edit project</a>
-                    </span>
-                @endcan
-                <form class="d-flex justify-content-center" action="{{ route('projects.destroy', $project->id) }}"
+                <div class="d-flex justify-content-start">
+                    <div class="row">
+                        <div class="col-12 mx-2">
+                            <a class="btn btn-primary" href="{{route('projects.index')}}">Go Back</a>
+                            @can('Moderate Website')
+                                <a class="btn btn-success"
+                                   href="{{route('projects.projectmembers.create',$project->id)}}">Add
+                                    Project Members</a>
+                                <a class="btn btn-primary" href="{{route('projects.edit',$project->id)}}">Edit
+                                    project</a>
+                            @endcan
+                        </div>
+                    </div>
+                </div>
+                <form action="{{ route('projects.destroy', $project->id) }}"
                       method="post">
                     @csrf @method('delete')
-                    <button type="submit" class="btn btn-danger d-flex justify-content-center"
-                            onclick="confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete
+
+                    <button type="submit" class="btn btn-danger w-100"
+                            onclick="return confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete
                         Project
                     </button>
                 </form>
             </div>
+
     </div>
     @endcan
 @endsection

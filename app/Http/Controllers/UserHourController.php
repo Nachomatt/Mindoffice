@@ -18,7 +18,9 @@ class UserHourController extends Controller
     public function index(Project $project, User $projectmember,UserHour $userhour)
     {
         $projects = Project::where('project_id', $project->id);
-        $userhours = UserHour::where('user_id',$projectmember->id)->get();
+        $userhours = UserHour::where([
+            ['user_id',$projectmember->id],
+            ['project_id',$project->id]])->get();
         return view('userhours.index', compact('projects', 'project', 'projectmember', 'userhours','userhour'));
     }
 
@@ -94,8 +96,7 @@ class UserHourController extends Controller
  * @param int $id
  * @return '\Illuminate\Http\Response
  */
-public
-function destroy(Project $project, User $projectmember, UserHour $userhour)
+public function destroy(Project $project, User $projectmember, UserHour $userhour)
 {
     $userhour->delete();
     $userhours = Userhour::all();

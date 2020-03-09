@@ -4,7 +4,7 @@
 
 
 
-    <h1 class="text-center text-white">Projects</h1>
+    <h1 class="text-white text-center">Permission Types</h1>
     @if (session('message'))
 
         <div class="alert alert-success" role="alert">
@@ -23,17 +23,15 @@
             </ul>
         </div>
     @endif
-    @can('Moderate Website')
-        <nav class="nav d-flex justify-content-center">
-            <ul class="nav">
-                <li>
-                    <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('projects.create') }}"><h2
-                            class="text-center">Create new
-                            project</h2></a>
-                </li>
-            </ul>
-        </nav>
-    @endcan
+
+    <nav class="nav d-flex justify-content-center">
+        <ul class="nav">
+            <li>
+                <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('permissionTypes.create') }}"><h2>Create new
+                        permission type</h2></a>
+            </li>
+        </ul>
+    </nav>
     <div class="d-flex justify-content-center pb-5">
         <table class="table table-striped table-dark table-bordered w-75 align-self-center">
             <thead>
@@ -44,12 +42,12 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($projects as $project)
+            @foreach($permissionTypes as $permissionType)
                 <tr>
-                    <td>{{ $project->id }}</td>
-                    <td>{{ $project->name }}</td>
-                    <td class="details"><a href="{{ route('projects.show',$project->id) }}"><h2
-                                class="btn btn-dark btn-outline-light">Details</h2></a></td>
+                    <td scope="row">{{ $permissionType->id }}</td>
+                    <td>{{ $permissionType->name }}</td>
+                    <td class="details"><a href="{{ route('permissionTypes.show',$permissionType->id) }}"><h2 class="btn btn-dark btn-outline-light">
+                                Details</h2></a></td>
                 </tr>
             @endforeach
             </tbody>

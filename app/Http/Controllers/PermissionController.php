@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePermission;
+use App\PermissionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -36,7 +37,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('permissions.create', compact('permissions'));
+        $permissionTypes = PermissionType::all();
+        return view('permissions.create', compact('permissions','permissiontypes'));
     }
 
     /**
@@ -48,6 +50,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $permission = Permission::create(['name' => $request->name]);
+        $permission->permission_type_id = $request->permission_type_id;
         $permission->save();
         return redirect()->route('permissions.index')->with('message', 'ヾ(⌐■_■)ノ♪ Continue jamming, Permission has been added partner.');
     }
@@ -60,6 +63,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
+        dd($permission->permissiontype);
         return view('permissions.show', compact('permission'));
     }
 
@@ -71,7 +75,8 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        return view('permissions.edit', compact('permission'));
+        $permissionTypes = PermissionType::all();
+        return view('permissions.edit', compact('permission','permissiontypes'));
     }
 
     /**
@@ -84,6 +89,7 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $permission->name = $request->name;
+        $permission->permission_type_id = $request->permission_type_id;
         $permission->save();
 
         return redirect()->route('permissions.index')->with('message', '\ (•◡•) /Woop Woop! Permission successfully edited\ (•◡•) /');

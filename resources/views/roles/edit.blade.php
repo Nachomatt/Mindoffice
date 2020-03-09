@@ -13,15 +13,23 @@
             </ul>
         </div>
     @endif
-    <a class="goback" href="{{route('roles.show', $role)}}">Go Back</a>
-    <form action="{{route('roles.update', $role)}}" method="post">
-        @method('PUT')
-        @csrf
-        Name: <input type="text" name="name" value="{{$role->name}}"><br>
-        @foreach($permissions as $permission)
-            {{$permission->name}}: <input @if($role->hasPermissionTo($permission) ) checked @endif type="checkbox" name="permissions[]" value="{{$permission->name}}"><br>
-        @endforeach
-        <br> <button class="aanpassen"  type="submit"><span class="knoptekst">Submit</span></button>
-    </form>
+    <div class="container">
+
+        <div class="card card-body w-25 bg-dark text-white">
+            <a class="btn btn-primary w-50 mb-2" href="{{route('roles.show', $role)}}">Go Back</a>
+            <form action="{{route('roles.update', $role)}}" method="post">
+                @method('PUT')
+                @csrf
+                Name: <input type="text" name="name" value="{{$role->name}}"><br>
+                @foreach($permissions as $permission)
+                    {{$permission->name}}: <input @if($role->hasPermissionTo($permission) ) checked
+                                                  @endif type="checkbox" name="permissions[]"
+                                                  value="{{$permission->name}}"><br>
+                @endforeach
+                <br>
+                <button class="btn btn-success" type="submit"><span class="knoptekst">Submit</span></button>
+            </form>
+        </div>
+    </div>
 @stop
 @endcan

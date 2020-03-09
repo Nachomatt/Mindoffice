@@ -26,7 +26,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md bg-dark shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-collapse-sm navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand text-white" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
@@ -65,6 +65,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('permissions.index') }}">
                                     <span class="text-white">{{ __('Permissions') }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('permissionTypes.index') }}">
+                                    <span class="text-white">{{ __('Permission Types') }}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
