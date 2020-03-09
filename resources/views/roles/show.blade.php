@@ -10,12 +10,20 @@
             <p class="knoptekst permissionlijst">Guard:
                 {{$role->guard_name}}
             </p>
-            <div class="permissionlijst">
-                <span class="knoptekst">Permissions:</span><br>
-                @foreach($permission as $p)
-                    <span class="knoptekst">{{$p->name}}</span><br>
+            <div class="row">
+                @foreach($permissionTypes as $id => $name)
+                    <div class="col col-lg-3">
+                        <span class="knoptekst"><h5 class="text-white">{{ $name }}</h5></span><br>
+
+                        <ul>
+                        @foreach($permissions->get($id, []) as $p)
+                            <li><span class="knoptekst">{{$p->name}}</span></li>
+                        @endforeach
+                        </ul>
+                    </div>
                 @endforeach
             </div>
+
             <ul class="nav flex-row">
                 <li class="nav-item ml-1">
                     <a class="btn btn-primary" href="{{route('roles.index')}}">Go Back</a>

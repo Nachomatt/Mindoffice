@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Project;
 use App\ProjectMember;
 use App\User;
@@ -15,7 +16,15 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user)
+    public function __construct()
+    {
+        $this->middleware("permission:see projects")->only("index", "show");
+        $this->middleware("permission:create projects")->only("create", "store");
+        $this->middleware("permission:edit projects")->only("edit", "update");
+        $this->middleware("permission:delete projects")->only("destroy");
+
+    }
+    public function index()
     {
         if(Auth::user()->hasRole('admin')){
             $projects = Project::all();

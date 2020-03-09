@@ -17,7 +17,7 @@ class PermissionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware("permission:see permissssssssions")->only("index", "show");
+        $this->middleware("permission:see permissions")->only("index", "show");
         $this->middleware("permission:create permissions")->only("create", "store");
         $this->middleware("permission:edit permissions")->only("edit", "update");
         $this->middleware("permission:delete permissions")->only("destroy");
@@ -33,7 +33,7 @@ class PermissionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -45,21 +45,22 @@ class PermissionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $permission = Permission::create(['name' => $request->name]);
         $permission->permission_type_id = $request->permission_type_id;
         $permission->save();
-        return redirect()->route('permissions.index')->with('message', 'ヾ(⌐■_■)ノ♪ Continue jamming, Permission has been added partner.');
+        return redirect()->route('permissions.index')
+            ->with('message', 'ヾ(⌐■_■)ノ♪ Continue jamming, Permission has been added partner.');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Permission $permission)
     {
@@ -70,7 +71,7 @@ class PermissionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Permission $permission)
     {
@@ -83,7 +84,7 @@ class PermissionController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Permission $permission)
     {
@@ -91,19 +92,21 @@ class PermissionController extends Controller
         $permission->permission_type_id = $request->permission_type_id;
         $permission->save();
 
-        return redirect()->route('permissions.index')->with('message', '\ (•◡•) /Woop Woop! Permission successfully edited\ (•◡•) /');
+        return redirect()->route('permissions.index')
+            ->with('message', '\ (•◡•) /Woop Woop! Permission successfully edited\ (•◡•) /');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Permission $permission)
     {
         $permission->delete();
 
-        return redirect()->route('permissions.index')->with('message', '\ (•◡•) /Woop Woop! Permission successfully deleted\ (•◡•) /');
+        return redirect()->route('permissions.index')
+            ->with('message', '\ (•◡•) /Woop Woop! Permission successfully deleted\ (•◡•) /');
     }
 }

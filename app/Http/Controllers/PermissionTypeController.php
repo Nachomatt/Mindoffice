@@ -31,7 +31,7 @@ class permissionTypeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -42,20 +42,21 @@ class permissionTypeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, PermissionType $permissionType)
     {
         $permissionType->name = $request->name;
         $permissionType->save();
-        return redirect()->route('permissionTypes.index')->with('message', 'ヾ(⌐■_■)ノ♪ Continue jamming, Permission Type has been added partner.');
+        return redirect()->route('permissionTypes.index')
+            ->with('message', 'ヾ(⌐■_■)ノ♪ Continue jamming, Permission Type has been added partner.');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(PermissionType $permissionType)
     {
@@ -66,7 +67,7 @@ class permissionTypeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(PermissionType $permissionType)
     {
@@ -78,26 +79,27 @@ class permissionTypeController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Permission $permissionType)
+    public function update(Request $request, PermissionType $permissionType)
     {
         $permissionType->name = $request->name;
         $permissionType->save();
-
-        return redirect()->route('permissionTypes.index')->with('message', '\ (•◡•) /Woop Woop! Permission Type successfully edited\ (•◡•) /');
+        return redirect()->route('permissionTypes.index')
+            ->with('message', '\ (•◡•) /Woop Woop! Permission Type successfully edited\ (•◡•) /');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(PermissionType $permissionType)
     {
         $permissionType->delete();
 
-        return redirect()->route('permissionTypes.index')->with('message', '\ (•◡•) /Woop Woop! Permission Type successfully deleted\ (•◡•) /');
+        return redirect()->route('permissionTypes.index')
+            ->with('message', '\ (•◡•) /Woop Woop! Permission Type successfully deleted\ (•◡•) /');
     }
 }

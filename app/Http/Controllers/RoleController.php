@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRole;
+use App\PermissionType;
+use App\Role;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -32,7 +33,7 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -46,7 +47,7 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRole $request)
     {
@@ -59,20 +60,20 @@ class RoleController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Role $role)
+    public function show(Role $role, PermissionType $permissionType)
     {
-        // $permissions= Role::with("permissions")->get();
-        $permission = $role->permissions()->get();
-        return view('roles.show', compact('role', 'permission'));
+        $permissionTypes = $permissionType::pluck('name', 'id');
+        $permissions = $role->permissions()->get()->groupBy('permission_type_id');
+        return view('roles.show', compact('role', 'permissions','permissionTypes'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Role $role)
     {

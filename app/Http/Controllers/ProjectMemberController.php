@@ -48,7 +48,8 @@ class ProjectMemberController extends Controller
             $user->project_id = $project->id;
             $user->save();
         }
-        return redirect()->route('projects.show', compact('project'))->with('message', 'Project member(s) have been added!');
+        return redirect()->route('projects.show', compact('project'))
+            ->with('message', 'Project member(s) have been added!');
 
     }
 
