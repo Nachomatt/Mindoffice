@@ -47,5 +47,8 @@ class User extends Authenticatable
      public function userhour() {
         return $this->hasOne('App\Userhour');
     }
+    public function timer() {
+        return $this->hasMany('App\Timer');
+    }
 
 }

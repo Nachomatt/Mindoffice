@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $this->middleware("permission:see users")->only("index", "show");
         $this->middleware("permission:create users")->only("create", "store");
-        $this->middleware("permission:edit users")->only("edit", "permissionEdit", "update","permissionUpdate");
+        $this->middleware("permission:edit users")->only("edit", "permissionEdit", "update", "permissionUpdate");
         $this->middleware("permission:delete users")->only("destroy");
 
     }
@@ -47,7 +47,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -67,7 +67,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user)
@@ -80,7 +80,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
@@ -94,8 +94,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, User $user)
@@ -110,7 +110,6 @@ class UserController extends Controller
     }
 
 
-
     public function roleEdit(User $user)
     {
         $roles = Role::all();
@@ -120,17 +119,16 @@ class UserController extends Controller
 
     public function roleUpdate(Request $request, User $user)
     {
-        if($request->role)
-        {
+        if ($request->role) {
             $user->syncRoles($request->role);
-            $role = Role::where('id',$request->role)->with('permissions')->first();
+            $role = Role::where('id', $request->role)->with('permissions')->first();
             $user->syncPermissions($role->permissions);
-        }
-        else{
+        } else {
             $user->syncRoles($request->role);
         }
         return redirect()->route('users.roleEdit', $user);
     }
+
     public function permissionEdit(User $user)
     {
         $roles = Role::all();
@@ -145,10 +143,11 @@ class UserController extends Controller
 
         return redirect()->route('users.permissionEdit', $user);
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
 

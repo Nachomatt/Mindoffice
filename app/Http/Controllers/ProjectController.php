@@ -24,11 +24,12 @@ class ProjectController extends Controller
         $this->middleware("permission:delete projects")->only("destroy");
 
     }
+
     public function index()
     {
-        if(Auth::user()->hasRole('admin')){
+        if (Auth::user()->hasRole('admin')) {
             $projects = Project::all();
-        } else{
+        } else {
             $projects = Auth::user()->userProjects;
         }
 
@@ -48,7 +49,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -58,36 +59,36 @@ class ProjectController extends Controller
 
         $project->save();
 
-         return redirect()->route('projects.index')->with('message', 'Project has been created!');
+        return redirect()->route('projects.index')->with('message', 'Project has been created!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project, User $user)
     {
-        return view('projects.show', compact('project','projectmembers', 'user'));
+        return view('projects.show', compact('project', 'projectmembers', 'user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
     {
-        return view('projects.edit',  compact('project'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
@@ -95,13 +96,13 @@ class ProjectController extends Controller
         $project->name = $request->name;
         $projects = Project::all();
         $project->save();
-        return redirect()->route('projects.index',compact('projects'));
+        return redirect()->route('projects.index', compact('projects'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)

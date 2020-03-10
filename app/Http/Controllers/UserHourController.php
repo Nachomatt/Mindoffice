@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Timer;
 use Illuminate\Http\Request;
 use App\UserHour;
 use App\Project;
 use App\ProjectMember;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserHourController extends Controller
 {
@@ -15,13 +17,13 @@ class UserHourController extends Controller
      *
      * @return '\Illuminate\Http\Response
      */
-    public function index(Project $project, User $projectmember,UserHour $userhour)
+    public function index(Project $project, User $projectmember, UserHour $userhour)
     {
         $projects = Project::where('project_id', $project->id);
         $userhours = UserHour::where([
-            ['user_id',$projectmember->id],
-            ['project_id',$project->id]])->get();
-        return view('userhours.index', compact('projects', 'project', 'projectmember', 'userhours','userhour'));
+            ['user_id', $projectmember->id],
+            ['project_id', $project->id]])->get();
+        return view('userhours.index', compact('projects', 'project', 'projectmember', 'userhours', 'userhour'));
     }
 
     /**
@@ -59,8 +61,8 @@ class UserHourController extends Controller
     public function show(Project $project, User $projectmember, UserHour $userhour)
     {
         $projects = Project::all();
-        $userhours = UserHour::where('user_id',$projectmember->id)->get();
-        return view('userhours.show', compact('userhour', 'projects', 'projectmember', 'project', 'userhour','userhours'));
+        $userhours = UserHour::where('user_id', $projectmember->id)->get();
+        return view('userhours.show', compact('userhour', 'projects', 'projectmember', 'project', 'userhour', 'userhours'));
     }
 
     /**
@@ -71,8 +73,8 @@ class UserHourController extends Controller
      */
     public function edit(Project $project, User $projectmember, UserHour $userhour)
     {
-        $userhours = UserHour::where('user_id',$projectmember->id)->get();
-        return view('userhours.edit', compact('project', 'projectmember', 'userhour','userhours'));
+        $userhours = UserHour::where('user_id', $projectmember->id)->get();
+        return view('userhours.edit', compact('project', 'projectmember', 'userhour', 'userhours'));
     }
 
     /**
@@ -87,19 +89,19 @@ class UserHourController extends Controller
         $userhour->hours = $request->hours;
         $userhour->save();
         $userhours = Userhour::all();
-        return view('userhours.index', compact('userhours', 'projects', 'projectmember', 'project', 'userhour','userhours'));
+        return view('userhours.index', compact('userhours', 'projects', 'projectmember', 'project', 'userhour', 'userhours'));
     }
 
-/**
- * Remove the specified resource from storage.
- *
- * @param int $id
- * @return '\Illuminate\Http\Response
- */
-public function destroy(Project $project, User $projectmember, UserHour $userhour)
-{
-    $userhour->delete();
-    $userhours = Userhour::all();
-    return view('userhours.index', compact('project', 'projectmember', 'userhours'));
-}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return '\Illuminate\Http\Response
+     */
+    public function destroy(Project $project, User $projectmember, UserHour $userhour)
+    {
+        $userhour->delete();
+        $userhours = Userhour::all();
+        return view('userhours.index', compact('project', 'projectmember', 'userhours'));
+    }
 }

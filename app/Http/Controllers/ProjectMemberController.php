@@ -19,7 +19,7 @@ class ProjectMemberController extends Controller
     public function index(Project $project)
     {
         $projects = Project::all();
-        return view('projectmembers.index', compact('projects','project'));
+        return view('projectmembers.index', compact('projects', 'project'));
     }
 
     /**
@@ -59,7 +59,7 @@ class ProjectMemberController extends Controller
      * @param  'int  $id'
      * @return '\Illuminate\Http\Response'
      */
-    public function show(UserHour $userhour, Project $project,User $projectmember)
+    public function show(UserHour $userhour, Project $project, User $projectmember)
     {
         return view('projectmembers.show', compact('project', 'projectmember', 'userhour'));
     }

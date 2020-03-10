@@ -28,7 +28,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-collapse-sm navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand text-white" href="{{ url('/') }}">
+            <a class="navbar-brand text-white" href="{{ url('/home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -78,13 +78,21 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('see projects')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('projects.index') }}">
-                                    <span class="text-white">{{ __('Projects') }}</span>
-                                </a>
-                            </li>
-                        @endcan
+                        @if(Auth::user()->userProjects->count() > 0 || (Auth::user()->hasRole('admin')))
+                            @can('see projects')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('projects.index') }}">
+                                        <span class="text-white">{{ __('Projects') }}</span>
+                                    </a>
+                                </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('timers.index') }}">
+                                            <span class="text-white">{{ __('Timers') }}</span>
+                                        </a>
+                                    </li>
+                            @endcan
+                        @else
+                        @endif
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -93,7 +101,8 @@
 
                             <div class="dropdown-menu bg-dark dropdown-menu-right text-white text-decoration-none"
                                  aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-white text-decoration-none bg-dark" href="{{ route('logout') }}"
+                                <a class="dropdown-item text-white text-decoration-none bg-dark"
+                                   href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                                     <span class="text-white">{{ __('Logout') }}</span>

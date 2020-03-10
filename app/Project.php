@@ -14,6 +14,10 @@ class Project extends Model
     {
         return $this->hasOne('App\UserHour');
     }
+    public function timer()
+    {
+        return $this->hasMany('App\Timer');
+    }
     public $timestamps = false;
 
 }

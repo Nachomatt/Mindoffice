@@ -35,18 +35,19 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(PermissionType $permissionType)
     {
-        $permissions = Permission::all();
+        $permissionTypes = $permissionType::pluck('name', 'id');
+        $permissions = Permission::all()->groupBy('permission_type_id');
 
 
-        return view('roles.create', compact('permissions'));
+        return view('roles.create', compact('permissions', 'permissionTypes'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreRole $request)
@@ -59,35 +60,36 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Role $role, PermissionType $permissionType)
     {
         $permissionTypes = $permissionType::pluck('name', 'id');
         $permissions = $role->permissions()->get()->groupBy('permission_type_id');
-        return view('roles.show', compact('role', 'permissions','permissionTypes'));
+        return view('roles.show', compact('role', 'permissions', 'permissionTypes'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Role $role)
+    public function edit(Role $role, Permission $permission, PermissionType $permissionType)
     {
-        $permissions = Permission::all();
+        $permissionTypes = $permissionType::pluck('name', 'id');
+        $permissions = Permission::all()->groupBy('permission_type_id');
 
 
-        return view('roles.edit', compact('permissions', 'role'));
+        return view('roles.edit', compact('permissions', 'role', 'permissionTypes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(StoreRole $request, Role $role)
@@ -102,7 +104,7 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($role)

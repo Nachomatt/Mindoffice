@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectMember extends Model
 {
- 
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo('App\Project');
     }
         public $timestamps = false;

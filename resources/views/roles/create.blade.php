@@ -13,16 +13,29 @@
             </ul>
         </div>
     @endif
-    <a class="goback" href="{{route('roles.index')}}"><span class="knoptekst">Go Back</span></a>
-
-    <form action="{{route('roles.store')}}" method="post">
-        @csrf
-        <span class="knoptekst permissionlijst">Name: <input type="text" name="name"></span><br>
-        @foreach($permissions as $permission)
-            <span class="knoptekst permissionlijst">{{$permission->name}}: <input type="checkbox" name="permissions[]" value="{{$permission->name}}"></span><br>
-            @endforeach
-        <br> <button class="aanpassen" type="submit"><span class="knoptekst">Submit</span></button>
-    </form>
+    <div class="container">
+        <h1 class="text-white text-center">Create a new role</h1>
+        <a class="btn btn-primary mb-2" href="{{route('roles.index')}}">Go Back</a>
+        <div class="card card-body bg-dark text-white">
+            <form action="{{route('roles.store')}}" method="post">
+                @csrf
+                <span class="knoptekst permissionlijst">Name: <input type="text" name="name"></span><br>
+                <div class="row">
+                    @foreach($permissionTypes as $id => $name)
+                        <div class="col col-lg-3">
+                            <span class="knoptekst"><h5 class="text-white">{{ $name }}</h5></span><br>
+                            @foreach($permissions->get($id, []) as $p)
+                                {{$p->name}}: <input type="checkbox" name="permissions[]"
+                                                     value="{{$p->name}}"><br>
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
+                <br>
+                <button class="btn btn-success" type="submit"><span class="knoptekst">Submit</span></button>
+            </form>
+        </div>
+    </div>
 
 @endsection
 @endcan
