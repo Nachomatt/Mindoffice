@@ -6,7 +6,7 @@ use App\Http\Requests\StoreRole;
 use App\PermissionType;
 use App\Role;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
+use App\Permission;
 
 class RoleController extends Controller
 {
@@ -80,8 +80,6 @@ class RoleController extends Controller
     {
         $permissionTypes = $permissionType::pluck('name', 'id');
         $permissions = Permission::all()->groupBy('permission_type_id');
-
-
         return view('roles.edit', compact('permissions', 'role', 'permissionTypes'));
     }
 

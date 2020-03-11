@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
+use App\PermissionType;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use App\Role;
+use App\Permission;
 
 class UserController extends Controller
 {
@@ -36,12 +37,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Permission $permission, PermissionType $permissionType)
     {
         $user = User::all();
-        $permissions = Permission::all();
         $roles = Role::all();
-        return view('users.create', compact('user', 'permissions', 'roles'));
+        $permissionTypes = $permissionType::pluck('name', 'id');
+        $permissions = Permission::all()->groupBy('permission_type_id');
+        return view('users.create', compact('user', 'permissions', 'roles','permissionTypes'));
     }
 
     /**

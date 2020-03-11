@@ -47,7 +47,7 @@
                       method="post">
                     @csrf @method('delete')
 
-                    <button type="submit" class="btn btn-danger w-100"
+                    <button type="submit" class="btn btn-danger w-100 mt-1"
                             onclick="return confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete
                         Project
                     </button>
