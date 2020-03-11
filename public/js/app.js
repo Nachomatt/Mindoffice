@@ -49526,6 +49526,22 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+new WOW().init();
+$(document).ready(function () {
+  $('[timer="true"]').each(function (_, timer) {
+    timer = $(timer);
+    var time = timer.find('.values');
+    timer.runner = new Timer();
+    timer.runner.start({
+      startValues: {
+        seconds: timer.data('seconds')
+      }
+    });
+    timer.runner.addEventListener('secondsUpdated', function () {
+      time.html(timer.runner.getTimeValues().toString());
+    });
+  });
+});
 
 /***/ }),
 

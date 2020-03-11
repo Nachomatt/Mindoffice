@@ -10907,19 +10907,3 @@ body {
   background-color: #212121;
 }
 
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .card {
-    -webkit-column-count: 9;
-       -moz-column-count: 9;
-            column-count: 9;
-  }
-}
-
-@media (min-width: 1200px) {
-  .card {
-    -webkit-column-count: 12;
-       -moz-column-count: 12;
-            column-count: 12;
-  }
-}
-
