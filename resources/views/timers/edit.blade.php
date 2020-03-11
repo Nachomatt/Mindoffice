@@ -13,7 +13,7 @@
                 @csrf
                 @method('PUT')
                 <h5 class="text-white float-left mt-1">Begintijd: </h5>
-                <input class="ml-3" type="number" name="time" placeholder="00:00:00" value="{{$timer->time}}"><br>
+                <input class="ml-3" name="time" placeholder="00:00:00" value="{{$timer->time}}"><br>
                 <br>
                 <h5 class="text-white float-left mt-1 mr-2">Project: </h5>
                 <select name="project_id">

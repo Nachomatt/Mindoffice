@@ -26,11 +26,11 @@ class TimerController extends Controller
     public function store(Request $request, Timer $timer)
     {
         $timer = new Timer();
-        $timer->time = $request->time;
+        $timer->formattedTime = $request->time;
         $timer->user_id = Auth::user()->id;
         $timer->project_id = $request->project_id;
-        $timer->created_at = now();
         $timer->save();
+
         return redirect()->route('home');
     }
 
@@ -52,22 +52,23 @@ class TimerController extends Controller
     public function start(Request $request, Timer $timer)
     {
         $timer->start();
-        $timers = Timer::where('user_id', Auth::user()->id)->get();
-        return view('timers.index', compact('timers'));
+
+        return redirect()->back();
     }
 
     public function pause(Request $request, Timer $timer)
     {
-        $timer->pause();
-        $timers = Timer::where('user_id', Auth::user()->id)->get();
-        return view('timers.index', compact('timers'));
+        $timer->stop();
+
+        return redirect()->back();
     }
 
     public function stop(Request $request, Timer $timer)
     {
         $timer->stop();
         $timers = Timer::where('user_id', Auth::user()->id)->get();
-        return view('timers.log', compact('timer'));
+        $projects = Auth::user()->userProjects()->get();
+        return view('timers.log', compact('timer','timers','projects'));
     }
 
     public function log(Timer $timer)
@@ -80,11 +81,18 @@ class TimerController extends Controller
     {
         $userhour = new UserHour();
         $userhour->user_id = Auth::user()->id;
-        $userhour->project_id = $timer->project_id;
-        $userhour->hours = $timer->time;
+        $userhour->project_id = $request->project_id;
+        $userhour->hours = $timer->formattedTime;
         $userhour->save();
-
         $timer->delete();
         return redirect()->route('home');
     }
+
+    public function destroy(Timer $timer)
+    {
+        $timer->delete();
+
+        return redirect()->back();
+    }
+
 }

@@ -12,7 +12,7 @@
             <form action="{{route('projects.projectmembers.userhours.store',[$project,$projectmember])}}" method="post">
                 @csrf
                 <h5 class="text-white float-left mt-1">Hours: </h5>
-                <input class="ml-3" type="number" name="hours"><br>
+                <input class="ml-3" name="hours" placeholder="00:00:00"><br>
                 <br>
                 <button class="btn btn-success float-left" type="submit">Submit</button>
             </form>

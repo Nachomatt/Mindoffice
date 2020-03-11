@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Timer extends Model
 {
@@ -20,13 +21,37 @@ class Timer extends Model
         'created_at', 'time'
     ];
 
-    public function setTimeAttribute($value)
+    public function setFormattedTimeAttribute($value)
     {
-        $this->attributes['time'] = strtotime($value);
-    }
-    public function getTimeAttribute($value)
-    {
+        if($value) {
+            $time = explode(':', $value);
+            $seconds = $time[0] * 3600;
+            $seconds += $time[1] * 60;
+            $seconds += $time[2];
 
+            $this->attributes['time'] = $seconds;
+        }
+    }
+
+    public function getFormattedTimeAttribute()
+    {
+        return Carbon::createFromTimestamp($this->time)->format('H:i:s');
+    }
+
+    public function getCurrentTimeAttribute()
+    {
+        return Carbon::createFromTimestamp($this->currentRawTime)->format('H:i:s');
+    }
+
+    public function getCurrentRawTimeAttribute()
+    {
+        $time = Carbon::createFromTimestamp($this->time);
+
+        if ($this->created_at) {
+            $time->addSeconds(Carbon::now()->diffInSeconds($this->created_at));
+        }
+
+        return $time->timestamp;
     }
 
     public $timestamps = false;
@@ -39,15 +64,13 @@ class Timer extends Model
             'created_at' => now()
         ]);
     }
-    public function pause()
-    {
-        $this->update([
-            'created_at' => null,
-        ]);
-    }
 
     public function stop()
     {
+        if ($this->created_at == null) {
+            return;
+        }
+
         $seconds = $this->created_at->diffInSeconds(now());
 
         $this->update([
