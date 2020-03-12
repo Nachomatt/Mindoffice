@@ -25,7 +25,7 @@ Route::get('timers/{timer}/pause','TimerController@pause')->name('timers.pause')
 Route::get('timers/{timer}/start','TimerController@start')->name('timers.start');
 Route::get('timers/{timer}/log','TimerController@log')->name('timers.log');
 Route::post('timers/{timer}/log','TimerController@sendlog')->name('timers.sendlog');
-Route::resource('timers', 'TimerController');
+Route::resource('timers', 'TimerController')->except('show');
 Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
 Route::get('users/{user}/roleEdit', 'UserController@roleEdit')->name('users.roleEdit');

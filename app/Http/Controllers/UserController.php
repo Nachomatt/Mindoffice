@@ -131,12 +131,13 @@ class UserController extends Controller
         return redirect()->route('users.roleEdit', $user);
     }
 
-    public function permissionEdit(User $user)
+    public function permissionEdit(Role $role,User $user,PermissionType $permissionType)
     {
         $roles = Role::all();
-        $permissions = Permission::all();
+        $permissionTypes = $permissionType::pluck('name', 'id');
+        $permissions = Permission::all()->groupBy('permission_type_id');
 
-        return view('users.permissionEdit', compact('permissions', 'user', 'roles'));
+        return view('users.permissionEdit', compact('permissions', 'user', 'roles','role','permissionTypes'));
     }
 
     public function permissionUpdate(Request $request, User $user)

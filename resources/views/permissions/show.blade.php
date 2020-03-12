@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@can('Moderate Website')
+@can('see permissions')
 
 @section('content')
     <h1 class="text-white text-center">Permission: {{$permission->name}}</h1>
@@ -30,7 +30,6 @@
                 </li>
             </ul>
         </div>
-    </div>
     </div>
 
 @endsection

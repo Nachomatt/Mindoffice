@@ -79,19 +79,19 @@
                                 </a>
                             </li>
                         @endcan
+                        @can('see projects')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('projects.index') }}">
+                                    <span class="text-white">{{ __('Projects') }}</span>
+                                </a>
+                            </li>
+                        @endcan
                         @if(Auth::user()->userProjects->count() > 0 || (Auth::user()->hasRole('admin')))
-                            @can('see projects')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('projects.index') }}">
-                                        <span class="text-white">{{ __('Projects') }}</span>
-                                    </a>
-                                </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('timers.index') }}">
-                                            <span class="text-white">{{ __('Timers') }}</span>
-                                        </a>
-                                    </li>
-                            @endcan
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('timers.index') }}">
+                                    <span class="text-white">{{ __('Timers') }}</span>
+                                </a>
+                            </li>
                         @else
                         @endif
                         <li class="nav-item dropdown">

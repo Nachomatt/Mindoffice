@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @can('see projects')
     <div class="container w-25 rounded">
         <div class="card-header bg-light border border-primary shadow-lg">
             <nav class="nav ">
@@ -17,7 +18,7 @@
                 </ul>
             </nav>
         </div>
-        @can('Moderate Website')
+        @can('manage project members')
             <div class="card-body bg-dark">
                 <h3 class="text-white text-center">Project Members:</h3>
                 @foreach($project->members as $p)
@@ -28,32 +29,40 @@
                     </li>
                 @endforeach
             </div>
-            <div class="bg-dark">
-                <div class="d-flex justify-content-start">
-                    <div class="row">
-                        <div class="col-12 mx-2">
-                            <a class="btn btn-primary" href="{{route('projects.index')}}">Go Back</a>
-                            @can('Moderate Website')
-                                <a class="btn btn-success"
-                                   href="{{route('projects.projectmembers.create',$project->id)}}">Add
-                                    Project Members</a>
-                                <a class="btn btn-primary" href="{{route('projects.edit',$project->id)}}">Edit
-                                    project</a>
-                            @endcan
-                        </div>
+        @endcan
+        <div class="bg-dark">
+            <div class="d-flex justify-content-start">
+                <div class="row">
+                    <div class="col-12 mx-2">
+                        <a class="btn btn-primary" href="{{route('projects.index')}}">Go Back</a>
+                        @can('create projects')
+                            <a class="btn btn-success"
+                               href="{{route('projects.projectmembers.create',$project->id)}}">Add
+                                Project Members</a>
+                            @else
+                        @endcan
+
+                        @can('edit projects')
+                            <a class="btn btn-primary" href="{{route('projects.edit',$project->id)}}">Edit
+                                project</a>
+                        @endcan
+
                     </div>
                 </div>
+            </div>
+            @can('delete projects')
                 <form action="{{ route('projects.destroy', $project->id) }}"
                       method="post">
                     @csrf @method('delete')
 
                     <button type="submit" class="btn btn-danger w-100 mt-1"
-                            onclick="return confirm('Are you sure, you want to delete project: {{ $project->name }}?');">Delete
+                            onclick="return confirm('Are you sure, you want to delete project: {{ $project->name }}?');">
+                        Delete
                         Project
                     </button>
                 </form>
-            </div>
-
+            @endcan
+        </div>
     </div>
     @endcan
 @endsection

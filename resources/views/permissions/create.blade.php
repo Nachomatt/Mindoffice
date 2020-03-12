@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@can('Moderate Website')
+@can('create permissions')
 
 
 
@@ -30,4 +30,6 @@
         </div>
     </div>
 @endsection
+@else
+    <script>window.location = "/login";</script>
 @endcan

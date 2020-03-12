@@ -25,21 +25,20 @@ class ProjectController extends Controller
 
     }
 
-    public function index()
+    public function index(User $user)
     {
         if (Auth::user()->hasRole('admin')) {
             $projects = Project::all();
         } else {
             $projects = Auth::user()->userProjects;
         }
-
-        return view('projects.index', compact('projects'));
+        return view('projects.index', compact('projects','user'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Request $request)
     {
@@ -50,7 +49,7 @@ class ProjectController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -66,10 +65,11 @@ class ProjectController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Project $project, User $user)
     {
+//        $user = User::where('id', Auth::user()->id)->get();
         return view('projects.show', compact('project', 'projectmembers', 'user'));
     }
 
@@ -77,7 +77,7 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Project $project)
     {
@@ -89,7 +89,7 @@ class ProjectController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Project $project)
     {
@@ -103,7 +103,7 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Project $project)
     {

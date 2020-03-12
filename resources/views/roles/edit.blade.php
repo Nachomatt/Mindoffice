@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@can('Moderate Website')
+@can('edit roles')
 
 
 

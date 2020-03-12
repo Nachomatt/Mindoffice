@@ -23,7 +23,7 @@
             </ul>
         </div>
     @endif
-    @can('Moderate Website')
+    @can('manage projects')
         <nav class="nav d-flex justify-content-center">
             <ul class="nav">
                 <li>
@@ -48,7 +48,7 @@
                 <tr>
                     <td>{{ $project->id }}</td>
                     <td>{{ $project->name }}</td>
-                    <td class="details"><a href="{{ route('projects.show',$project->id) }}"><h2
+                    <td class="details"><a href="{{ route('projects.show',[$project->id,$user->id]) }}"><h2
                                 class="btn btn-dark btn-outline-light">Details</h2></a></td>
                 </tr>
             @endforeach

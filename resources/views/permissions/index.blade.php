@@ -1,5 +1,5 @@
 @extends ('layouts.app')
-
+@can('see permissions')
 @section('content')
 
 
@@ -54,3 +54,4 @@
         </table>
     </div>
 @endsection
+@endcan

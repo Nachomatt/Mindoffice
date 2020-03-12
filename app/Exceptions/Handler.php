@@ -58,6 +58,15 @@ class Handler extends ExceptionHandler
                 case 403:
                     return response()->view('errors.' . '403', [], 403);
                     break;
+                case 500:
+                    return response()->view('errors.' . '500', [], 500);
+                    break;
+                case 422:
+                    return response()->view('errors.' . '422', [], 422);
+                    break;
+                case 400:
+                    return response()->view('errors.' . '400', [], 400);
+                    break;
             }
         }
         return parent::render($request, $exception);

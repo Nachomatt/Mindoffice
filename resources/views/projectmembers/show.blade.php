@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @can('manage project members')
     <div class="container">
         <div class="card bg-dark text-white w-100">
             <br>
@@ -14,7 +15,7 @@
                     <a class="btn btn-primary mb-2 my-2" href="{{route('projects.show',$project->id)}}">Go Back</a>
                 </li>
                 <li class="nav-item">
-                    @can('Moderate Website')
+                    @can('manage project members')
                         <a class="btn btn-success mb-2 my-2"
                            href="{{route('projects.projectmembers.edit',[$project->id,$projectmember->id])}}">Edit
                             project member</a>
@@ -31,7 +32,7 @@
                         Hours</a>
                 </li>
                 <li class="nav-item">
-                    @can('Moderate Website')
+                    @can('manage project members')
                         <form action="{{ route('projects.projectmembers.destroy',[$project->id,$projectmember->id]) }}"
                               method="post">
                             @csrf @method('delete')
@@ -47,6 +48,6 @@
 
         </div>
     </div>
-
+    @endcan
 @endsection
 

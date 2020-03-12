@@ -14,14 +14,13 @@ class ProjectMemberController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Project $project)
+    public function __construct()
     {
-        $projects = Project::all();
-        return view('projectmembers.index', compact('projects', 'project'));
-    }
+        $this->middleware("permission:manage project members");
 
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -37,7 +36,7 @@ class ProjectMemberController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  '\Illuminate\Http\Request  $request'
-     * @return '\Illuminate\Http\Response'
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Project $project)
     {
@@ -57,7 +56,7 @@ class ProjectMemberController extends Controller
      * Display the specified resource.
      *
      * @param  'int  $id'
-     * @return '\Illuminate\Http\Response'
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(UserHour $userhour, Project $project, User $projectmember)
     {
@@ -68,7 +67,7 @@ class ProjectMemberController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Project $project, User $projectmember)
     {
@@ -81,7 +80,7 @@ class ProjectMemberController extends Controller
      *
      * @param \Illuminate\Http\Request '$'request'
      * @param int  '$id'
-     * @return '\Illuminate\Http\Response'
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function update(Request $request, Project $project, User $projectmember)
     {
@@ -96,7 +95,7 @@ class ProjectMemberController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function destroy(Project $project, User $projectmember)
     {

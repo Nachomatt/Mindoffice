@@ -14,16 +14,23 @@
         </div>
     @endif
     <div class="container">
-
-        <div class="card card-body w-25 bg-dark text-white">
-            <a class="btn btn-primary w-50" href="{{route('users.show', $user)}}">Go Back</a>
+        <a class="btn btn-primary" href="{{route('users.show', $user)}}">Go Back</a>
+        <div class="card card-body bg-dark text-white">
             <form action="{{route('users.permissionUpdate', $user)}}" method="post">
                 @method('PUT')
                 @csrf
-                @foreach($permissions as $permission)
-                    {{$permission->name}} <input @if($user->hasPermissionTo($permission)) checked @endif type="checkbox"
-                                                 name="permissions[]" value="{{$permission->name}}"><br>
-                @endforeach
+                <div class="row">
+                    @foreach($permissionTypes as $id => $name)
+                        <div class="col col-lg-3">
+                            <span class="knoptekst"><h5 class="text-white">{{ $name }}</h5></span><br>
+                            @foreach($permissions->get($id, []) as $p)
+                                {{$p->name}}: <input @if($user->hasPermissionTo($p) ) checked
+                                                     @endif type="checkbox" name="permissions[]"
+                                                     value="{{$p->name}}"><br>
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
                 <br>
                 <button class="btn btn-success" type="submit">Submit</button>
             </form>

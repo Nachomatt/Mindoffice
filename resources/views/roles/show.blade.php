@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@can('Moderate Website')
+@can('see roles')
 @section('content')
     <h1 class="text-white text-center">Role: {{$role->name}}</h1>
     <div class="container d-flex justify-content-center">

@@ -15,7 +15,7 @@ class UserHourController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Project $project, User $projectmember, UserHour $userhour)
     {
@@ -29,7 +29,7 @@ class UserHourController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(Project $project, User $projectmember)
     {
@@ -40,7 +40,7 @@ class UserHourController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(Request $request, UserHour $userhour, Project $project, User $projectmember)
     {
@@ -69,7 +69,7 @@ class UserHourController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Project $project, User $projectmember, UserHour $userhour)
     {
@@ -96,7 +96,7 @@ class UserHourController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return '\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function destroy(Project $project, User $projectmember, UserHour $userhour)
     {

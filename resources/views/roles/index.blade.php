@@ -1,5 +1,5 @@
 @extends ('layouts.app')
-
+@can('see roles')
 @section('content')
     <div class="smallpage">
         @if (session('message'))
@@ -45,3 +45,4 @@
         </div>
     </div>
 @endsection
+@endcan
