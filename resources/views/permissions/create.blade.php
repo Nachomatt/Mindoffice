@@ -23,7 +23,8 @@
                 Name: <input type="text" name="name"><br>
                 <br>
                 @foreach($permissionTypes as $permissionType)
-                    {{$permissionType->name}}: <input type="radio" name="permission_type_id" value="{{$permissionType->id}}"><br>
+                    {{$permissionType->name}}: <input type="radio" name="permission_type_id"
+                                                      value="{{$permissionType->id}}"><br>
                 @endforeach
                 <button class="btn btn-success" type="submit"><span class="knoptekst">Submit</span></button>
             </form>

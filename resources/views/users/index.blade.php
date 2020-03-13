@@ -26,7 +26,8 @@
     <nav class="nav d-flex justify-content-center">
         <ul class="nav">
             <li>
-                <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('users.create') }}"><h2 class="knoptekst">Create new user</h2>
+                <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('users.create') }}"><h2
+                        class="knoptekst">Create new user</h2>
                 </a>
             </li>
         </ul>
@@ -48,7 +49,8 @@
                     <td scope="row">{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td class="details"><a href="{{ route('users.show',$user->id) }}"><h2 class="btn btn-dark btn-outline-light">Details</h2>
+                    <td class="details"><a href="{{ route('users.show',$user->id) }}"><h2
+                                class="btn btn-dark btn-outline-light">Details</h2>
                         </a></td>
                     <td></td>
                 </tr>

@@ -5,7 +5,8 @@
         <div class="row">
             @foreach($timers as $t)
                 <div class="col-4 mb-2">
-                    <div class="card card-body bg-dark text-white" timer="{{ $t->created_at != null ? 'true' : '' }}" data-seconds="{{ $t->currentRawTime }}">
+                    <div class="card card-body bg-dark text-white" timer="{{ $t->created_at != null ? 'true' : '' }}"
+                         data-seconds="{{ $t->currentRawTime }}">
                         <br>
                         @if($t->currentTime)
                             <p>Time worked: <span class="values">{{$t->currentTime}}</span></p>

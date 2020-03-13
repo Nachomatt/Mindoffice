@@ -26,7 +26,8 @@
                     <a class="btn btn-success" href="{{route('users.edit',$user->id)}}">Edit user</a>
                 </li>
                 <li class="nav-item ml-1">
-                    <a class="btn btn-success" href="{{route('users.roleEdit',$user->id)}}"><span class="knoptekst">Edit role</span></a>
+                    <a class="btn btn-success" href="{{route('users.roleEdit',$user->id)}}">
+                        <span class="knoptekst">Edit role</span></a>
                 </li>
                 <li class="nav-item ml-1">
                     <a class="btn btn-success" href="{{route('users.permissionEdit',$user->id)}}"><span
@@ -35,7 +36,8 @@
                 <form action="{{ route('users.destroy', $user) }}" method="post">
                     @csrf @method('delete')
                     <button type="submit" class="btn btn-danger ml-1"
-                            onclick="return confirm('Are you sure, you want to delete user: {{ $user->name }}?');">Delete user
+                            onclick="return confirm('Are you sure, you want to delete user: {{ $user->name }}?');">
+                        Delete user
                     </button>
                 </form>
             </ul>

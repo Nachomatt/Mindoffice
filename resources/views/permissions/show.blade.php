@@ -22,7 +22,8 @@
                     <form action="{{ route('permissions.destroy', $permission) }}" method="post">
                         @csrf @method('delete')
                         <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('Are you sure, you want to delete permission: {{ $permission->name }}?');">
+                                onclick="return confirm
+                                    ('Are you sure, you want to delete permission: {{ $permission->name }}?');">
                             Delete
                             permission
                         </button>

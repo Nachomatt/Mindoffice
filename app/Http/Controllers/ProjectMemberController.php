@@ -16,19 +16,23 @@ class ProjectMemberController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function __construct()
     {
         $this->middleware("permission:manage project members");
 
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return '\Illuminate\Http\Response
      */
+
     public function create(Project $project)
     {
         $users = User::all();
+
         return view('projectmembers.create', compact('project', 'users'));
     }
 
@@ -36,18 +40,25 @@ class ProjectMemberController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  '\Illuminate\Http\Request  $request'
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
+
     public function store(Request $request, Project $project)
     {
-        //$request->users heeft alle user IDs die zijn aangevinkt
-        foreach ($request->users as $u) {
+        foreach ($request->users as $u)
+        {
+
             $user = new ProjectMember();
+
             $user->user_id = $u;
+
             $user->project_id = $project->id;
+
             $user->save();
         }
+
         return redirect()->route('projects.show', compact('project'))
+
             ->with('message', 'Project member(s) have been added!');
 
     }
@@ -58,6 +69,7 @@ class ProjectMemberController extends Controller
      * @param  'int  $id'
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function show(UserHour $userhour, Project $project, User $projectmember)
     {
         return view('projectmembers.show', compact('project', 'projectmember', 'userhour'));
@@ -69,9 +81,11 @@ class ProjectMemberController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function edit(Project $project, User $projectmember)
     {
         $ps = Project::all();
+
         return view('projectmembers.edit', compact('project', 'ps', 'projectmember'));
     }
 
@@ -82,10 +96,13 @@ class ProjectMemberController extends Controller
      * @param int  '$id'
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function update(Request $request, Project $project, User $projectmember)
     {
         $projectmember->user_id = $project->members()->attach(User::find($projectmember->id));
+
         $projectmember->userProjects()->detach(Project::find($project->id));
+
         $projectmember->userProjects()->attach(Project::find($request->project_id));
 
         return view('projects.show', compact('project'));
@@ -97,10 +114,13 @@ class ProjectMemberController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function destroy(Project $project, User $projectmember)
     {
         $project->members()->detach(Project::find($project->id));
+
         $project->members()->detach(User::find($projectmember->id));
+
         return view('projects.show', compact('project'));
     }
 }

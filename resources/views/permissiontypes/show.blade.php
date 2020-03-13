@@ -12,13 +12,15 @@
                     <a class="btn btn-primary" href="{{route('permissionTypes.index')}}">Go Back</a>
                 </li>
                 <li class="nav-item ml-1">
-                    <a class="btn btn-success" href="{{route('permissionTypes.edit',$permissionType->id)}}">Edit Permission Type</a>
+                    <a class="btn btn-success" href="{{route('permissionTypes.edit',$permissionType->id)}}">Edit
+                        Permission Type</a>
                 </li>
                 <li class="nav-item ml-1">
                     <form action="{{ route('permissionTypes.destroy', $permissionType) }}" method="post">
                         @csrf @method('delete')
                         <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('Are you sure, you want to delete permissionType: {{ $permissionType->name }}?');">
+                                onclick="return confirm
+                                    ('Are you sure, you want to delete permissionType: {{ $permissionType->name }}?');">
                             Delete Permission Type
                         </button>
                     </form>

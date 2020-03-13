@@ -23,7 +23,10 @@
                 Name: <input type="text" name="name" value="{{$permission->name}}"><br>
                 <br>
                 @foreach($permissionTypes as $permissionType)
-                    {{$permissionType->name}}: <input @if($permission->permissionType) checked @endif type="radio" name="permission_type_id" value="{{$permissionType->id}}"><br>
+
+                    {{$permissionType->name}}: <input @if($permission->type->id == $permissionType->id) checked
+                                                      @endif type="radio" name="permission_type_id"
+                                                      value="{{$permissionType->id}}"><br>
                 @endforeach
                 <button class="btn btn-success" type="submit">Submit</button>
             </form>

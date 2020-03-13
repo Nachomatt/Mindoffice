@@ -15,11 +15,15 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
         $this->middleware("permission:see permissions")->only("index", "show");
+
         $this->middleware("permission:create permissions")->only("create", "store");
+
         $this->middleware("permission:edit permissions")->only("edit", "update");
+
         $this->middleware("permission:delete permissions")->only("destroy");
 
     }
@@ -27,6 +31,7 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = Permission::all();
+
         return view('permissions.index', compact('permissions'));
     }
 
@@ -35,9 +40,11 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function create()
     {
         $permissionTypes = PermissionType::all();
+
         return view('permissions.create', compact('permissions', 'permissionTypes'));
     }
 
@@ -47,12 +54,17 @@ class PermissionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function store(Request $request)
     {
         $permission = Permission::create(['name' => $request->name]);
+
         $permission->permission_type_id = $request->permission_type_id;
+
         $permission->save();
+
         return redirect()->route('permissions.index')
+
             ->with('message', 'ヾ(⌐■_■)ノ♪ Continue jamming, Permission has been added partner.');
     }
 
@@ -62,6 +74,7 @@ class PermissionController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function show(Permission $permission)
     {
         return view('permissions.show', compact('permission'));
@@ -73,9 +86,11 @@ class PermissionController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function edit(Permission $permission)
     {
         $permissionTypes = PermissionType::all();
+
         return view('permissions.edit', compact('permission', 'permissionTypes'));
     }
 
@@ -86,10 +101,13 @@ class PermissionController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function update(Request $request, Permission $permission)
     {
         $permission->name = $request->name;
+
         $permission->permission_type_id = $request->permission_type_id;
+
         $permission->save();
 
         return redirect()->route('permissions.index')
@@ -102,6 +120,7 @@ class PermissionController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function destroy(Permission $permission)
     {
         $permission->delete();

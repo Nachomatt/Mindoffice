@@ -13,11 +13,15 @@ class permissionTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
         $this->middleware("permission:see permissions")->only("index", "show");
+
         $this->middleware("permission:create permissions")->only("create", "store");
+
         $this->middleware("permission:edit permissions")->only("edit", "update");
+
         $this->middleware("permission:delete permissions")->only("destroy");
 
     }
@@ -25,6 +29,7 @@ class permissionTypeController extends Controller
     public function index()
     {
         $permissionTypes = PermissionType::all();
+
         return view('permissionTypes.index', compact('permissionTypes'));
     }
 
@@ -33,6 +38,7 @@ class permissionTypeController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function create()
     {
         return view('permissionTypes.create', compact('permissionTypes'));
@@ -44,11 +50,15 @@ class permissionTypeController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function store(Request $request, PermissionType $permissionType)
     {
         $permissionType->name = $request->name;
+
         $permissionType->save();
+
         return redirect()->route('permissionTypes.index')
+
             ->with('message', 'ヾ(⌐■_■)ノ♪ Continue jamming, Permission Type has been added partner.');
     }
 
@@ -58,6 +68,7 @@ class permissionTypeController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function show(PermissionType $permissionType)
     {
         return view('permissionTypes.show', compact('permissionType'));
@@ -69,6 +80,7 @@ class permissionTypeController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function edit(PermissionType $permissionType)
     {
         return view('permissionTypes.edit', compact('permissionType'));
@@ -81,11 +93,15 @@ class permissionTypeController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function update(Request $request, PermissionType $permissionType)
     {
         $permissionType->name = $request->name;
+
         $permissionType->save();
+
         return redirect()->route('permissionTypes.index')
+
             ->with('message', '\ (•◡•) /Woop Woop! Permission Type successfully edited\ (•◡•) /');
     }
 
@@ -95,11 +111,13 @@ class permissionTypeController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function destroy(PermissionType $permissionType)
     {
         $permissionType->delete();
 
         return redirect()->route('permissionTypes.index')
+
             ->with('message', '\ (•◡•) /Woop Woop! Permission Type successfully deleted\ (•◡•) /');
     }
 }

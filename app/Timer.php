@@ -17,16 +17,21 @@ class Timer extends Model
         return $this->belongsTo('App\Project');
     }
 
-    protected $fillable = [
-        'created_at', 'time'
-    ];
+    protected $fillable =
+        [
+            'created_at', 'time'
+        ];
 
     public function setFormattedTimeAttribute($value)
     {
-        if($value) {
+        if ($value)
+        {
             $time = explode(':', $value);
+
             $seconds = $time[0] * 3600;
+
             $seconds += $time[1] * 60;
+
             $seconds += $time[2];
 
             $this->attributes['time'] = $seconds;
@@ -60,20 +65,23 @@ class Timer extends Model
 
     public function start()
     {
-        $this->update([
+        $this->update
+        ([
             'created_at' => now()
         ]);
     }
 
     public function stop()
     {
-        if ($this->created_at == null) {
+        if ($this->created_at == null)
+        {
             return;
         }
 
         $seconds = $this->created_at->diffInSeconds(now());
 
-        $this->update([
+        $this->update
+        ([
             'created_at' => null,
             'time' => $this->time + $seconds
         ]);

@@ -16,23 +16,31 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
         $this->middleware("permission:see projects")->only("index", "show");
+
         $this->middleware("permission:create projects")->only("create", "store");
+
         $this->middleware("permission:edit projects")->only("edit", "update");
+
         $this->middleware("permission:delete projects")->only("destroy");
 
     }
 
     public function index(User $user)
     {
-        if (Auth::user()->hasRole('admin')) {
+        if (Auth::user()->hasRole('admin'))
+        {
             $projects = Project::all();
-        } else {
-            $projects = Auth::user()->userProjects;
         }
-        return view('projects.index', compact('projects','user'));
+        else
+            {
+            $projects = Auth::user()->userProjects;
+            }
+
+        return view('projects.index', compact('projects', 'user'));
     }
 
     /**
@@ -40,6 +48,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function create(Request $request)
     {
         return view('projects.create');
@@ -51,9 +60,11 @@ class ProjectController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function store(Request $request)
     {
         $project = new Project();
+
         $project->name = $request->name;
 
         $project->save();
@@ -67,9 +78,9 @@ class ProjectController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function show(Project $project, User $user)
     {
-//        $user = User::where('id', Auth::user()->id)->get();
         return view('projects.show', compact('project', 'projectmembers', 'user'));
     }
 
@@ -79,6 +90,7 @@ class ProjectController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function edit(Project $project)
     {
         return view('projects.edit', compact('project'));
@@ -91,11 +103,15 @@ class ProjectController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function update(Request $request, Project $project)
     {
         $project->name = $request->name;
+
         $projects = Project::all();
+
         $project->save();
+
         return redirect()->route('projects.index', compact('projects'));
     }
 
@@ -105,9 +121,11 @@ class ProjectController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
+
     public function destroy(Project $project)
     {
         $project->delete();
+
         return redirect()->route('projects.index');
     }
 }
