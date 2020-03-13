@@ -28,8 +28,7 @@
         <ul class="nav">
             <li>
                 <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('permissionTypes.create') }}">
-                    <h2>Create new
-                        permission type</h2></a>
+                    <h2>Create new permission type</h2></a>
             </li>
         </ul>
     </nav>
@@ -48,8 +47,7 @@
                     <td scope="row">{{ $permissionType->id }}</td>
                     <td>{{ $permissionType->name }}</td>
                     <td class="details"><a href="{{ route('permissionTypes.show',$permissionType->id) }}"><h2
-                                class="btn btn-dark btn-outline-light">
-                                Details</h2></a></td>
+                                class="btn btn-dark btn-outline-light">Details</h2></a></td>
                 </tr>
             @endforeach
             </tbody>

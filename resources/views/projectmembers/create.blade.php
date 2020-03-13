@@ -3,6 +3,16 @@
 
 @section('content')
     @can('manage project members')
+
+        @if (session('message'))
+
+            <div class="alert alert-success" role="alert">
+
+                {{  session('message')  }}
+            </div>
+
+        @endif
+
         <div class="container text-white">
             <form action="{{route('projects.projectmembers.store',$project->id)}}" method="post">
                 @csrf

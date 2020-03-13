@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -8,11 +9,14 @@
                     <div class="card-header bg-dark text-white">Test Test 1 2 3</div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                            @if (session('message'))
+
+                                <div class="alert alert-success" role="alert">
+
+                                    {{  session('message')  }}
+                                </div>
+
+                            @endif
                         <div>Welcome, {{ Auth::user()->name }}. You are now logged in.</div>
                         @if(Auth::user()->userProjects->count() > 0 || (Auth::user()->hasRole('admin')))
                             @can('see projects')
@@ -20,8 +24,10 @@
                                     <a class="btn btn-success nav-link" href="{{ route('timers.create') }}">
                                         <span class="text-white">{{ __('Start Working') }}</span>
                                     </a>
+                                    <a class="btn btn-primary my-1" href="{{url('/send-mail'),Auth::user()->name}}">Send Mail</a>
+                                    @endcan
                                 </div>
-                            @endcan
+
                         @else
                         @endif
 

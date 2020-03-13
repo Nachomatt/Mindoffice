@@ -28,6 +28,7 @@ class StoreRole extends FormRequest
             'name' => 'required',
         ];
     }
+
     public function messages()
     {
         return [

@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Email;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -56,3 +59,11 @@ Route::resource('projects.projectmembers', 'ProjectMemberController');
 Route::resource('projects.projectmembers.userhours', 'UserHourController');
 
 Route::resource('permissionTypes', 'PermissionTypeController');
+
+Route::get('/send-mail', function () {
+
+    Mail::to('newuser@example.com')->send(new Email());
+
+    return redirect(url('/home'))->with('message', 'Your mail has been sent '.Auth::user()->name.'. we will contact you soon.');
+
+});
