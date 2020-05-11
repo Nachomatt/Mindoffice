@@ -14,7 +14,12 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        $projectPermissions = Permission::where('name', 'like', '%projects%')->get();
+
         Role::create(['name' => 'admin'])->syncPermissions(Permission::all());
+
+        Role::create(['name' => 'project leader'])->syncPermissions($projectPermissions);
+
         Role::create(['name' => 'user'])->syncPermissions();
 
         DB::table('model_has_roles')->insert([

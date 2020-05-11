@@ -15,22 +15,99 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'Moderate Website']);
+        Permission::insert([
+                [
+                    'name' => 'Moderate Website',
+                    'permission_type_id' => '1'
+                ],
 
-        Permission::create(['name' => 'see roles']);
-        Permission::create(['name' => 'create roles']);
-        Permission::create(['name' => 'edit roles']);
-        Permission::create(['name' => 'delete roles']);
+                [
+                    'name' => 'see roles',
+                    'permission_type_id' => '2'
+                ],
 
-        Permission::create(['name' => 'see permissions']);
-        Permission::create(['name' => 'create permissions']);
-        Permission::create(['name' => 'edit permissions']);
-        Permission::create(['name' => 'delete permissions']);
+                [
+                    'name' => 'create roles',
+                    'permission_type_id' => '2'
+                ],
 
-        Permission::create(['name' => 'see users']);
-        Permission::create(['name' => 'create users']);
-        Permission::create(['name' => 'edit users']);
-        Permission::create(['name' => 'delete users']);
+                [
+                    'name' => 'edit roles',
+                    'permission_type_id' => '2'
+                ],
+
+                [
+                    'name' => 'delete roles',
+                    'permission_type_id' => '2'
+                ],
+
+                [
+                    'name' => 'see permissions',
+                    'permission_type_id' => '3'
+                ],
+
+                [
+                    'name' => 'create permissions',
+                    'permission_type_id' => '3'
+                ],
+
+                [
+                    'name' => 'edit permissions',
+                    'permission_type_id' => '3'
+                ],
+
+                [
+                    'name' => 'delete permissions',
+                    'permission_type_id' => '3'
+                ],
+
+                [
+                    'name' => 'see users',
+                    'permission_type_id' => '4'
+                ],
+
+                [
+                    'name' => 'create users',
+                    'permission_type_id' => '4'
+                ],
+
+                [
+                    'name' => 'delete users',
+                    'permission_type_id' => '4'
+                ],
+
+                [
+                    'name' => 'see projects',
+                    'permission_type_id' => '5'
+                ],
+
+                [
+                    'name' => 'create projects',
+                    'permission_type_id' => '5'
+                ],
+
+                [
+                    'name' => 'edit projects',
+                    'permission_type_id' => '5'
+                ],
+
+                [
+                    'name' => 'delete projects',
+                    'permission_type_id' => '5'
+                ],
+
+                [
+                    'name' => 'manage projects',
+                    'permission_type_id' => '5'
+                ],
+
+                [
+                    'name' => 'manage project members',
+                    'permission_type_id' => '6'
+                ]]
+
+
+        );
 
     }
 }

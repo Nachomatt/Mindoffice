@@ -16,36 +16,49 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable =
+        [
+            'name', 'email', 'password',
+        ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden =
+        [
+            'password', 'remember_token',
+        ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts =
+        [
+            'email_verified_at' => 'datetime',
+        ];
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsToMany('App\Project');
     }
-    public function userProjects() {
+
+    public function userProjects()
+    {
         return $this->belongsToMany(Project::class, 'project_members');
     }
-     public function userhour() {
+
+    public function userhour()
+    {
         return $this->hasOne('App\Userhour');
+    }
+
+    public function timer()
+    {
+        return $this->hasMany('App\Timer');
     }
 
 }

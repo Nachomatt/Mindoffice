@@ -23,34 +23,36 @@
             </ul>
         </div>
     @endif
-    @can('Moderate Website')
+    @can('manage projects')
         <nav class="nav d-flex justify-content-center">
             <ul class="nav">
                 <li>
-                    <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('projects.create') }}"><h2 class="text-center">Create new
+                    <a class="nav-link btn btn-dark btn-outline-light mb-4" href="{{ route('projects.create') }}"><h2
+                            class="text-center">Create new
                             project</h2></a>
                 </li>
             </ul>
         </nav>
     @endcan
-    <div class="d-flex justify-content-center">
-    <table class="table table-striped table-dark table-bordered w-75 align-self-center">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Details</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($projects as $project)
+    <div class="d-flex justify-content-center pb-5">
+        <table class="table table-striped table-dark table-bordered w-75 align-self-center">
+            <thead>
             <tr>
-                <td>{{ $project->id }}</td>
-                <td>{{ $project->name }}</td>
-                <td class="details"><a href="{{ route('projects.show',$project->id) }}"><h2 class="btn btn-dark btn-outline-light">Details</h2></a></td>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Details</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($projects as $project)
+                <tr>
+                    <td>{{ $project->id }}</td>
+                    <td>{{ $project->name }}</td>
+                    <td class="details"><a href="{{ route('projects.show',[$project->id,$user->id]) }}"><h2
+                                class="btn btn-dark btn-outline-light">Details</h2></a></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection

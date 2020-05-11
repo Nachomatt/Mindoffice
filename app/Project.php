@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    public function members() {
+    public function members()
+    {
         return $this->belongsToMany(User::class, 'project_members');
     }
 
@@ -14,6 +15,11 @@ class Project extends Model
     {
         return $this->hasOne('App\UserHour');
     }
+    public function timer()
+    {
+        return $this->hasMany('App\Timer');
+    }
+
     public $timestamps = false;
 
 }

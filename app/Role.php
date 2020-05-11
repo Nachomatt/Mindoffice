@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Role extends Model
+class Role extends \Spatie\Permission\Models\Role
 {
-    public function permission()
+    protected $table = 'roles';
+
+    public function permissions(): BelongsToMany
     {
-        return  $this->belongsTo('App\Permission');
+        return $this->belongsToMany('App\Permission', 'role_has_permissions');
     }
 }

@@ -2,12 +2,10 @@
 
 @section('content')
 
-
-
     <h1 class="mt-5 knoptekst2">Project Members</h1>
     @if (session('message'))
 
-        <div  class="alert alert-success"  role="alert">
+        <div class="alert alert-success" role="alert">
 
             {{  session('message')  }}
         </div>

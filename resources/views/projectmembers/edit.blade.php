@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@can('Moderate Website')
 @section('content')
+    @can('manage project members')
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -28,9 +28,11 @@
                 <button class="btn btn-success float-left" type="submit">Submit</button>
             </form>
             <div class="d-flex justify-content-start">
-                <a class="btn btn-primary float-right mx-2" href="{{route('projects.projectmembers.show',[$project->id,$projectmember->id])}}">Go Back</a>
+                <a class="btn btn-primary float-right mx-2"
+                   href="{{route('projects.projectmembers.show',[$project->id,$projectmember->id])}}">Go Back</a>
             </div>
         </div>
     </div>
-@stop
-@endcan
+    @endcan
+@endsection
+

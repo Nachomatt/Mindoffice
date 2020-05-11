@@ -13,6 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/script.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/src/easytimer.min.js"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="icon" href="{{ asset('storage/logo.png') }}">
@@ -21,14 +23,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/styling.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/wow.css') }}">
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md bg-dark shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-collapse-sm navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand text-white" href="{{ url('/') }}">
+            <a class="navbar-brand text-white" href="{{ url('/home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -68,6 +69,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('permissionTypes.index') }}">
+                                    <span class="text-white">{{ __('Permission Types') }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('roles.index') }}">
                                     <span class=" text-white">{{ __('Roles') }}</span>
                                 </a>
@@ -80,6 +86,14 @@
                                 </a>
                             </li>
                         @endcan
+                        @if(Auth::user()->userProjects->count() > 0 || (Auth::user()->hasRole('admin')))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('timers.index') }}">
+                                    <span class="text-white">{{ __('Timers') }}</span>
+                                </a>
+                            </li>
+                        @else
+                        @endif
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -88,7 +102,8 @@
 
                             <div class="dropdown-menu bg-dark dropdown-menu-right text-white text-decoration-none"
                                  aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-white text-decoration-none bg-dark" href="{{ route('logout') }}"
+                                <a class="dropdown-item text-white text-decoration-none bg-dark"
+                                   href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
                                     <span class="text-white">{{ __('Logout') }}</span>
