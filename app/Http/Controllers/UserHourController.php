@@ -53,6 +53,7 @@ class UserHourController extends Controller
 
     public function store(Request $request, UserHour $userhour, Project $project, User $projectmember)
     {
+        /**Een nieuwe log wordt aangemaakt*/
         $userhour = new Userhour();
 
         $userhour->hours = $request->hours;
@@ -61,6 +62,7 @@ class UserHourController extends Controller
 
         $userhour->project_id = $project->id;
 
+        /**Data wordt opgehaald met behulp van request en Ids en opgeslagen in de database*/
         $userhour->save();
 
         return view('projectmembers.show', compact('project', 'projectmember', 'userhour'));
@@ -77,6 +79,7 @@ class UserHourController extends Controller
     {
         $projects = Project::all();
 
+        /**Haalt alleen de gelogde uren op van de desbetreffende gebruiker*/
         $userhours = UserHour::where('user_id', $projectmember->id)->get();
 
         return view('userhours.show',

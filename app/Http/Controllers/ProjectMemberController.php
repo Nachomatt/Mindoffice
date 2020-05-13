@@ -45,9 +45,10 @@ class ProjectMemberController extends Controller
 
     public function store(Request $request, Project $project)
     {
+        /**Haalt alle aangevinkte gebruikers op*/
         foreach ($request->users as $u)
         {
-
+            /**En maakt voor elke een nieuw projectlid aan*/
             $user = new ProjectMember();
 
             $user->user_id = $u;

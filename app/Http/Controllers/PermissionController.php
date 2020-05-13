@@ -18,6 +18,7 @@ class PermissionController extends Controller
 
     public function __construct()
     {
+        /**De middleware checkt of je toestemming hebt, zo ja dan kunnen deze functies gebruikt worden*/
         $this->middleware("permission:see permissions")->only("index", "show");
 
         $this->middleware("permission:create permissions")->only("create", "store");
@@ -57,6 +58,7 @@ class PermissionController extends Controller
 
     public function store(Request $request)
     {
+        /**Als er een permission aangemaakt wordt wordt er een type meegevraagd*/
         $permission = Permission::create(['name' => $request->name]);
 
         $permission->permission_type_id = $request->permission_type_id;

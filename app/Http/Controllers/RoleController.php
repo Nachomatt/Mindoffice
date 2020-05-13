@@ -76,8 +76,10 @@ class RoleController extends Controller
 
     public function show(Role $role, PermissionType $permissionType)
     {
+        /**Van de permission types worden alleen het id en de naam gepakt*/
         $permissionTypes = $permissionType::pluck('name', 'id');
 
+        /**hier worden de permissions gepakt die een type hebben en worden ze gesorteerd op hun permission type id*/
         $permissions = $role->permissions()->get()->groupBy('permission_type_id');
 
         return view('roles.show', compact('role', 'permissions', 'permissionTypes'));

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    {{--Checkt of je toestemming hebt om projecten te zien, zo ja dan wordt dit getoond.--}}
     @can('see projects')
         <div class="container w-25 rounded">
             <div class="card-header bg-light border border-primary shadow-lg">
@@ -28,6 +29,7 @@
                     </ul>
                 </nav>
             </div>
+            {{--Checkt of je toestemming hebt om projectleden te managen, zo ja dan wordt dit getoond.--}}
             @can('manage project members')
                 <div class="card-body bg-dark">
                     <h3 class="text-white text-center">Project Members:</h3>
@@ -45,13 +47,14 @@
                     <div class="row">
                         <div class="col-12 mx-2">
                             <a class="btn btn-primary" href="{{route('projects.index')}}">Go Back</a>
+                            {{--Checkt of je toestemming hebt om projecten te maken, zo ja dan wordt dit getoond.--}}
                             @can('create projects')
                                 <a class="btn btn-success"
                                    href="{{route('projects.projectmembers.create',$project->id)}}">Add
                                     Project Members</a>
                             @else
                             @endcan
-
+                            {{--Checkt of je toestemming hebt om projecten aan te passen, zo ja dan wordt dit getoond.--}}
                             @can('edit projects')
                                 <a class="btn btn-primary" href="{{route('projects.edit',$project->id)}}">Edit
                                     project</a>

@@ -3,6 +3,8 @@
 @section('content')
     <a class="goback" href="{{route('projects.projectmembers.show',
         [$project->id,$projectmember->id])}}">Go Back</a>
+
+    {{--Voor elk userhour dat opgehaald wordt wordt er een overzicht gemaakt--}}
     @foreach($userhours as $u)
         <span class="knoptekst">
 

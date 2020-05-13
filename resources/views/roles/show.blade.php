@@ -11,11 +11,13 @@
                 {{$role->guard_name}}
             </p>
             <div class="row">
+                {{--Voor elk permissiontype wordt een rij aangemaakt--}}
                 @foreach($permissionTypes as $id => $name)
                     <div class="col col-lg-3">
                         <span class="knoptekst"><h5 class="text-white">{{ $name }}</h5></span><br>
 
                         <ul>
+                            {{--En de permissions met het type dat er gelijk aan is worden in een lijst gezet--}}
                         @foreach($permissions->get($id, []) as $p)
                             <li><span class="knoptekst">{{$p->name}}</span></li>
                         @endforeach
